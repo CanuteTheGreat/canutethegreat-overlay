@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+		<description>Primary maintainer</description>
+	</maintainer>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<longdescription lang="en">
+		Brave is a free and open-source web browser developed by Brave Software, Inc.
+		based on the Chromium web browser. It blocks ads and website trackers, and
+		provides a way for users to send cryptocurrency contributions in the form of
+		Basic Attention Tokens (BAT) to websites and content creators.
+
+		Brave distinguishes itself from other Chromium-based browsers through features
+		focused on privacy:
+		- Built-in ad blocker and tracker blocker
+		- HTTPS Everywhere integration
+		- Script blocking
+		- Third-party cookie blocking
+		- Brave Shields for per-site privacy settings
+		- Brave Rewards (optional BAT rewards system)
+		- Brave Wallet for cryptocurrency
+		- Tor integration in private windows
+		- Built-in IPFS support
+
+		This is the binary package that downloads pre-compiled releases from Brave's
+		official GitHub repository, providing faster installation and updates compared
+		to building from source.
+
+		NOTE: This binary package includes ALL optional components (Brave Rewards,
+		Brave Wallet, Tor, VPN support, etc.) pre-compiled. These features can be
+		enabled or disabled through Brave's settings interface at runtime. For
+		build-time control of optional components, use www-client/brave-browser instead.
+	</longdescription>
+	<use>
+		<flag name="keyring">
+			Enable support for storing passwords in the system keyring
+			(GNOME Keyring, KWallet, etc.) via app-crypt/libsecret
+		</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">brave/brave-browser</remote-id>
+		<bugs-to>https://github.com/brave/brave-browser/issues</bugs-to>
+		<changelog>https://brave.com/latest/</changelog>
+		<doc>https://support.brave.com/</doc>
+	</upstream>
+</pkgmetadata>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+		<description>Primary maintainer</description>
+	</maintainer>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<longdescription lang="en">
+		Brave is a free and open-source web browser developed by Brave Software, Inc.
+		based on the Chromium web browser. It blocks ads and website trackers, and
+		provides a way for users to send cryptocurrency contributions in the form of
+		Basic Attention Tokens (BAT) to websites and content creators.
+
+		Brave distinguishes itself from other Chromium-based browsers through features
+		focused on privacy:
+		- Built-in ad blocker and tracker blocker
+		- HTTPS Everywhere integration
+		- Script blocking
+		- Third-party cookie blocking
+		- Brave Shields for per-site privacy settings
+		- Brave Rewards (optional BAT rewards system)
+		- Brave Wallet for cryptocurrency
+		- Tor integration in private windows
+		- Built-in IPFS support
+
+		This package builds Brave from source, which provides full control over the
+		build process and optimizations, but requires significant disk space (100GB+)
+		and compilation time (several hours). Most users should use www-client/brave-bin
+		instead, which installs pre-compiled binaries.
+	</longdescription>
+	<use>
+		<flag name="component-build">
+			Enables component build mode, where each component is built as a shared library.
+			This speeds up development builds but should not be used for production.
+		</flag>
+		<flag name="cups">Enable CUPS printing support</flag>
+		<flag name="hangouts">Enable support for Google Hangouts extension</flag>
+		<flag name="kerberos">Enable Kerberos authentication support</flag>
+		<flag name="libcxx">Use bundled libc++ instead of system libstdc++</flag>
+		<flag name="lto">Enable Link Time Optimization for better performance (increases build time significantly)</flag>
+		<flag name="official">Build an official release (enables optimizations and branding)</flag>
+		<flag name="pax-kernel">Apply PaX kernel compatibility patches</flag>
+		<flag name="pgo">Enable Profile-Guided Optimization (requires multiple build passes)</flag>
+		<flag name="proprietary-codecs">Enable proprietary codecs like H.264, AAC, MP3</flag>
+		<flag name="pulseaudio">Enable PulseAudio support for audio</flag>
+		<flag name="rewards">
+			Enable Brave Rewards, the Basic Attention Token (BAT) rewards system.
+			Allows users to earn and tip BAT tokens for viewing privacy-respecting ads.
+		</flag>
+		<flag name="js-optimize">Optimize JavaScript and WebUI resources</flag>
+		<flag name="screencast">Enable screen sharing via PipeWire</flag>
+		<flag name="system-toolchain">Use system toolchain instead of Clang/LLVM</flag>
+		<flag name="tor">
+			Enable Tor integration for private browsing with Tor.
+			Allows opening private windows with Tor for enhanced anonymity.
+		</flag>
+		<flag name="vaapi">Enable VA-API hardware video acceleration</flag>
+		<flag name="vpn">
+			Enable Brave VPN/Firewall support.
+			Provides built-in VPN functionality (requires subscription).
+		</flag>
+		<flag name="wallet">
+			Enable Brave Wallet, a browser-native cryptocurrency wallet.
+			Supports Ethereum, Solana, and other blockchain networks without extensions.
+		</flag>
+		<flag name="widevine">Enable Widevine CDM for DRM content (Netflix, etc.)</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">brave/brave-browser</remote-id>
+		<bugs-to>https://github.com/brave/brave-browser/issues</bugs-to>
+		<changelog>https://brave.com/latest/</changelog>
+		<doc>https://support.brave.com/</doc>
+	</upstream>
+</pkgmetadata>

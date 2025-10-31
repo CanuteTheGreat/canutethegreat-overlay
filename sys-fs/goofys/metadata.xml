@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+		<description>Proxied maintainer; set to assignee in all bugs</description>
+	</maintainer>
+	<maintainer type="project">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<longdescription>
+		Goofys is a high-performance, POSIX-ish Amazon S3 file system written in Go.
+		It allows you to mount an S3 bucket as a file system, prioritizing performance
+		over strict POSIX compliance. Goofys supports multiple cloud storage backends
+		including Amazon S3, Google Cloud Storage, Azure Blob Storage, and S3-compatible
+		services like Ceph and MinIO. It provides better performance than s3fs while
+		being easier to configure than complex caching solutions
+	</longdescription>
+	<upstream>
+		<remote-id type="github">kahing/goofys</remote-id>
+		<bugs-to>https://github.com/kahing/goofys/issues</bugs-to>
+	</upstream>
+</pkgmetadata>

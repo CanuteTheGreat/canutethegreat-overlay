@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person" proxied="yes">
+		<email>your-email@example.com</email>
+		<name>Your Name</name>
+	</maintainer>
+	<maintainer type="project" proxied="proxy">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<longdescription>
+		AlienFX is a Linux utility to control the lighting effects of
+		Alienware computers. It provides both a command-line interface (alienfx)
+		and an optional GTK-based graphical interface (alienfx-gtk).
+
+		Supported features include:
+		- Control individual lighting zones on supported Alienware devices
+		- Create and save lighting themes as JSON files
+		- Configure lighting for different power states (boot, AC, battery, etc.)
+		- Automatic device detection via USB
+		- Interactive zone scanning for unsupported devices
+
+		The package includes udev rules to allow non-root access to the
+		AlienFX USB controller hardware.
+	</longdescription>
+	<use>
+		<flag name="gtk">
+			Install the GTK-based graphical user interface (alienfx-gtk)
+			in addition to the command-line interface
+		</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">trackmastersteve/alienfx</remote-id>
+		<bugs-to>https://github.com/trackmastersteve/alienfx/issues</bugs-to>
+		<changelog>https://github.com/trackmastersteve/alienfx/releases</changelog>
+	</upstream>
+</pkgmetadata>

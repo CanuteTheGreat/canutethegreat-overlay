@@ -1,0 +1,79 @@
+--- a/alienfx/ui/gtkui/action_renderer.py
++++ b/alienfx/ui/gtkui/action_renderer.py
+@@ -32,7 +32,6 @@ AlienFxActionCellRenderer: Gtk.CellRenderer subclass to render actions in a
+ Gtk.TreeView.
+ """
+
+-from past.utils import old_div
+ import cairo
+
+ import gi
+@@ -73,7 +72,7 @@ class AlienFXActionCellRenderer(Gtk.CellRenderer):
+         # if we're lucky. This is hackish, but an officially supported hack
+         # as per the pygtk faq :)
+         treeview.style_get_property("horizontal-separator", prop)
+-        self.cell_padding = old_div(prop.get_int(),2)
++        self.cell_padding = prop.get_int() // 2
+         treeview.style_get_property("grid-line-width", prop)
+         self.cell_padding += prop.get_int()
+         self.selected_action = None
+@@ -81,8 +80,8 @@ class AlienFXActionCellRenderer(Gtk.CellRenderer):
+
+     def _convert_x_to_action_index(self, x):
+         """ Convert the given x coordinate to an action index. """
+-        return int(old_div((x - self.cell_padding - 1),
+-            (self.item_width + self.item_spacing + self.line_width)))
++        return int((x - self.cell_padding - 1) //
++            (self.item_width + self.item_spacing + self.line_width))
+
+     def select_action_at_index(self, index):
+         """ Select the action at the given index. """
+@@ -120,7 +119,7 @@ class AlienFXActionCellRenderer(Gtk.CellRenderer):
+         """ Renders the cell. """
+         start_x = cell_area.x + self.cell_padding + 1
+         # vertically center the row of action items
+-        start_y = cell_area.y + old_div((cell_area.height - self.item_height),2)
++        start_y = cell_area.y + (cell_area.height - self.item_height) // 2
+
+         for i, action in enumerate(actions.actions):
+             action_type = action["type"]
+@@ -128,7 +127,7 @@ class AlienFXActionCellRenderer(Gtk.CellRenderer):
+             if action_type == AlienFXThemeFile.KW_ACTION_TYPE_FIXED:
+                 colours = action["colours"]
+                 ctx.set_source_rgb(*[
+-                        old_div(float(x),self.max_colour_val) for x in colours[0]])
++                        float(x) / self.max_colour_val for x in colours[0]])
+                 if i == actions.selected_action:
+                     ctx.set_source_rgba(*self.border_selected_bright)
+                     self._rounded_rectangle(ctx,
+@@ -142,16 +141,16 @@ class AlienFXActionCellRenderer(Gtk.CellRenderer):
+                 colours = action["colours"]
+                 # draw the starting colour
+                 ctx.set_source_rgb(*[
+-                        old_div(float(x),self.max_colour_val) for x in colours[0]])
++                        float(x) / self.max_colour_val for x in colours[0]])
+                 self._rounded_rectangle(ctx,
+-                        start_x, start_y, old_div(self.item_width,2), self.item_height)
++                        start_x, start_y, self.item_width // 2, self.item_height)
+                 ctx.fill()
+                 # draw the ending colour
+                 ctx.set_source_rgb(*[
+-                        start_x+ old_div(self.item_width,2), start_y,
+-                        old_div(self.item_width,2), self.item_height)
++                        start_x + self.item_width // 2, start_y,
++                        self.item_width // 2, self.item_height)
+                 ctx.fill()
+                 if i == actions.selected_action:
+                     ctx.set_source_rgba(*self.border_selected_bright)
+@@ -158,9 +157,9 @@ class AlienFXActionCellRenderer(Gtk.CellRenderer):
+             elif action_type == AlienFXThemeFile.KW_ACTION_TYPE_PULSE:
+                 colours = action["colours"]
+                 ctx.set_source_rgb(*[
+-                        old_div(float(x),self.max_colour_val) for x in colours[0]])
++                        float(x) / self.max_colour_val for x in colours[0]])
+                 ctx.set_source_rgb(*[
+-                        old_div(float(x),self.max_colour_val) for x in colours[1]])
++                        float(x) / self.max_colour_val for x in colours[1]])
+                 if i == actions.selected_action:
+                     ctx.set_source_rgba(*self.border_selected_bright)
+                     self._rounded_rectangle(ctx,

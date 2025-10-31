@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>maintainer@example.com</email>
+		<name>Your Name</name>
+		<description>Primary maintainer</description>
+	</maintainer>
+	<longdescription lang="en">
+		Free Download Manager (FDM) is a powerful, modern download accelerator
+		and organizer. It features intelligent dynamic file segmentation and
+		safe multipart downloading technology to accelerate downloads. FDM
+		supports HTTP, HTTPS, FTP, BitTorrent protocols and integrates with
+		popular web browsers.
+
+		Key features include:
+		- Download acceleration through dynamic segmentation
+		- BitTorrent support with DHT, PEX, and magnet links
+		- Browser integration via extensions
+		- Video download from popular streaming sites
+		- Built-in media preview
+		- Site login and password management
+		- Traffic usage control and bandwidth limiting
+		- Scheduler for automated downloads
+		- Pause and resume capabilities
+		- Multi-language interface
+
+		Note: This is a binary package. The source code for Free Download
+		Manager version 6.x is proprietary. Earlier versions (2.5 to 3.9.7)
+		were open source under the GPL license.
+	</longdescription>
+	<use>
+		<flag name="gstreamer">
+			Enable GStreamer support for media preview functionality.
+			This allows previewing video and audio files before or during
+			download. Requires gst-plugins-base and gst-plugins-good with
+			appropriate codec support.
+		</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">FreeDownloadManagerTeam</remote-id>
+		<bugs-to>https://www.freedownloadmanager.org/support.htm</bugs-to>
+		<doc lang="en">https://www.freedownloadmanager.org/help.htm</doc>
+		<changelog>https://www.freedownloadmanager.org/whatsnew.htm</changelog>
+	</upstream>
+	<slots>
+		<slot name="0">Stable slot for FDM 6.x branch</slot>
+	</slots>
+</pkgmetadata>
