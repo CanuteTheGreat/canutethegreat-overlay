@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person" proxied="yes">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<maintainer type="project" proxied="proxy">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<longdescription>
+		Waydroid is a container-based approach to boot a full Android system
+		on regular GNU/Linux systems running Wayland desktop environments.
+
+		It uses Linux namespaces (user, pid, uts, net, mount, ipc) to run
+		Android in a container and provides a seamless integration with the
+		host system including:
+
+		- Hardware acceleration for graphics (Intel and AMD GPUs)
+		- Clipboard sharing between Android and Linux
+		- Desktop integration with application launchers
+		- Notification forwarding to the desktop
+		- ADB access for development and debugging
+
+		The Android environment is based on a customized LineageOS image,
+		currently running Android 13. Optional Google Apps (GAPPS) support
+		is available during initialization.
+
+		Note: Waydroid requires a Wayland session and does not work with X11.
+		Your kernel must be configured with Android binder support and other
+		required options.
+	</longdescription>
+	<use>
+		<flag name="apparmor">
+			Enable AppArmor security profiles for the LXC container
+		</flag>
+		<flag name="clipboard">
+			Enable clipboard sharing between Android and Linux host
+			(requires dev-python/pyclip with Wayland support)
+		</flag>
+		<flag name="nftables">
+			Use nftables for container networking (recommended).
+			Disable to use legacy iptables instead.
+		</flag>
+		<flag name="openrc">
+			Install OpenRC init script for managing the Waydroid container
+		</flag>
+		<flag name="systemd">
+			Install systemd service units for managing the Waydroid container
+		</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">waydroid/waydroid</remote-id>
+		<bugs-to>https://github.com/waydroid/waydroid/issues</bugs-to>
+		<changelog>https://github.com/waydroid/waydroid/releases</changelog>
+		<doc>https://docs.waydro.id/</doc>
+	</upstream>
+</pkgmetadata>

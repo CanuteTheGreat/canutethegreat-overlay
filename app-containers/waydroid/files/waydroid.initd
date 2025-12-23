@@ -1,0 +1,43 @@
+#!/sbin/openrc-run
+# Copyright 2025 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Waydroid Android Container"
+command="/usr/bin/waydroid"
+command_args="container start"
+command_background="yes"
+pidfile="/run/${RC_SVCNAME}.pid"
+
+depend() {
+	need localmount
+	after bootmisc
+}
+
+start_pre() {
+	# Ensure binder devices are available
+	if [ ! -d /dev/binderfs ]; then
+		ebegin "Mounting binderfs"
+		mkdir -p /dev/binderfs
+		mount -t binder binder /dev/binderfs || {
+			eerror "Failed to mount binderfs. Ensure CONFIG_ANDROID_BINDERFS is enabled."
+			return 1
+		}
+		eend $?
+	fi
+}
+
+start() {
+	ebegin "Starting Waydroid container"
+	${command} container start
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping Waydroid container"
+	${command} container stop
+	eend $?
+}
+
+status() {
+	${command} status
+}
