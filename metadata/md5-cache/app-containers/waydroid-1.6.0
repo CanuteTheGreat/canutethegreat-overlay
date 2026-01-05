@@ -1,0 +1,16 @@
+BDEPEND=python_single_target_python3_11? ( dev-lang/python:3.11 ) python_single_target_python3_12? ( dev-lang/python:3.12 ) python_single_target_python3_13? ( dev-lang/python:3.13 ) virtual/pkgconfig
+DEFINED_PHASES=install postinst postrm preinst setup
+DESCRIPTION=Container-based approach to boot a full Android system on Linux
+EAPI=8
+HOMEPAGE=https://waydro.id/ https://github.com/waydroid/waydroid
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=linux-info python-single-r1 systemd xdg
+IUSE=+apparmor clipboard +nftables +openrc systemd python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13
+KEYWORDS=~amd64 ~arm64
+LICENSE=GPL-3
+RDEPEND=python_single_target_python3_11? ( dev-lang/python:3.11 ) python_single_target_python3_12? ( dev-lang/python:3.12 ) python_single_target_python3_13? ( dev-lang/python:3.13 ) app-containers/lxc[apparmor?,seccomp] python_single_target_python3_11? ( dev-python/dbus-python[python_targets_python3_11(-)] >=dev-python/gbinder-1.1.2[python_targets_python3_11(-)] dev-python/pygobject:3[python_targets_python3_11(-)] clipboard? ( >=dev-python/pyclip-0.7.0[python_targets_python3_11(-),wayland] ) ) python_single_target_python3_12? ( dev-python/dbus-python[python_targets_python3_12(-)] >=dev-python/gbinder-1.1.2[python_targets_python3_12(-)] dev-python/pygobject:3[python_targets_python3_12(-)] clipboard? ( >=dev-python/pyclip-0.7.0[python_targets_python3_12(-),wayland] ) ) python_single_target_python3_13? ( dev-python/dbus-python[python_targets_python3_13(-)] >=dev-python/gbinder-1.1.2[python_targets_python3_13(-)] dev-python/pygobject:3[python_targets_python3_13(-)] clipboard? ( >=dev-python/pyclip-0.7.0[python_targets_python3_13(-),wayland] ) ) >=dev-libs/gbinder-1.1.21 >=dev-libs/libglibutil-1.0.67 net-dns/dnsmasq nftables? ( net-firewall/nftables ) !nftables? ( net-firewall/iptables )
+REQUIRED_USE=^^ ( python_single_target_python3_11 python_single_target_python3_12 python_single_target_python3_13 ) || ( openrc systemd )
+SLOT=0
+SRC_URI=https://github.com/waydroid/waydroid/archive/refs/tags/1.6.0.tar.gz -> waydroid-1.6.0.tar.gz
+_eclasses_=linux-info	efd923656513c879204fec6638eadee5	multiprocessing	1e32df7deee68372153dca65f4a7c21f	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57	python-utils-r1	dbb8c4d794033ad7e7221eaf567a6c90	systemd	a964c0cbe818b5729da1dbfcee5be861	toolchain-funcs	30214924c0c3b92ec7dbf24fc70d60d3	xdg	3ef49a87c52c8b77c476351195dfe575	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
+_md5_=e1a0de19ed6f27738d8aca719849bb7d

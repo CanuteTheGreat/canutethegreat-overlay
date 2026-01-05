@@ -8,5 +8,5 @@ KEYWORDS=~amd64 ~hppa ~ppc ~x86
 LICENSE=BSD
 RDEPEND=sys-libs/zlib bfio? ( =app-forensics/libbfio-0.0.20120425_alpha ) fuse? ( sys-fs/fuse:= ) uuid? ( sys-apps/util-linux ) ssl? ( dev-libs/openssl:0= ) zlib? ( sys-libs/zlib )
 SLOT=0/2
-SRC_URI=https://github.com/libyal/libewf/releases/download/20201230/libewf-experimental-20201230.tar.gz
+SRC_URI=https://github.com/libyal/libewf/releases/download/20240506/libewf-experimental-20240506.tar.gz
 _md5_=57e819396c7da1b0f00f7427e14ece2e

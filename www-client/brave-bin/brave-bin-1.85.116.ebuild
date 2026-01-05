@@ -89,8 +89,8 @@ src_prepare() {
 	# Remove cron job
 	rm -r etc || die "Failed to remove cron job"
 
-	# Remove packages that are not needed
-	rm -r usr/share/menu || die "Failed to remove menu"
+	# Remove packages that are not needed (may not exist in newer versions)
+	rm -rf usr/share/menu
 
 	# Fix desktop file
 	pushd usr/share/applications >/dev/null || die

@@ -1,0 +1,14 @@
+DEFINED_PHASES=install postinst postrm preinst unpack
+DEPEND=x11-libs/libva
+DESCRIPTION=Linux desktop client for GeForce NOW, using Electron
+EAPI=8
+HOMEPAGE=https://github.com/hmlendea/gfn-electron
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=xdg
+KEYWORDS=~amd64 ~arm ~x86
+LICENSE=GPL-3
+RDEPEND=x11-libs/libva
+SLOT=0
+SRC_URI=https://github.com/hmlendea/gfn-electron/releases/download/v2.2.0/geforcenow-electron_2.2.0_linux.zip
+_eclasses_=xdg	3ef49a87c52c8b77c476351195dfe575	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
+_md5_=433d48101698056e726285418740e95a

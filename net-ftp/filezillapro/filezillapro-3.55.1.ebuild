@@ -3,7 +3,7 @@
 
 EAPI=8
 
-WX_GTK_VER="3.0-gtk3"
+WX_GTK_VER="3.2-gtk3"
 
 inherit wxwidgets xdg
 
@@ -25,7 +25,7 @@ RDEPEND="
 	>=dev-db/sqlite-3.7
 	>=dev-libs/pugixml-1.7
 	>=net-libs/gnutls-3.5.7
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X]
+	>=x11-libs/wxGTK-3.2:${WX_GTK_VER}[X]
 	x11-misc/xdg-utils"
 DEPEND="${RDEPEND}"
 RESTRICT="fetch"
