@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit wrapper desktop
+inherit systemd wrapper desktop
 
 MY_V=$(ver_cut 1-2)
 MY_PV=$(ver_rs 3 '_')
@@ -17,7 +17,7 @@ S="${WORKDIR}/NX/etc/NX/server/packages"
 LICENSE="nomachine"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
-IUSE="+nxserver +nxnode +nxrunner +nxplayer"
+IUSE="+nxserver +nxnode +nxrunner +nxplayer systemd"
 RESTRICT="strip"
 
 DEPEND=""
@@ -38,6 +38,10 @@ src_install() {
 		tar xzof nxserver.tar.gz -C "${D}"/opt
 		make_desktop_entry "/opt/bin/nxserver" "nxserver" "${NXROOT}/share/icons/48x48/NoMachine-desktop.png" "Network" ""
 		make_wrapper nxserver ${NXROOT}/bin/nxserver ${NXROOT} ${NXROOT}/lib /opt/bin
+
+		if use systemd ; then
+			systemd_dounit "${D}${NXROOT}/scripts/systemd/nxserver.service"
+		fi
 	fi
 	if use nxnode ; then
 		tar xzof nxnode.tar.gz -C "${D}"/opt
