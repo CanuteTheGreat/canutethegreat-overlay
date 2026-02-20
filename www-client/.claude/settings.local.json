@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(sudo emerge:*)",
+      "Bash(sudo chmod:*)",
+      "Bash(ls:*)",
+      "Bash(sudo egencache:*)",
+      "Bash(sudo cat:*)",
+      "Bash(sudo -u portage cat:*)",
+      "Bash(chmod:*)",
+      "Bash(xargs:*)",
+      "WebFetch(domain:www.nomachine.com)",
+      "WebFetch(domain:www.freedownloadmanager.org)",
+      "WebFetch(domain:www.insynchq.com)",
+      "WebFetch(domain:downloads.nomachine.com)",
+      "WebFetch(domain:download.nomachine.com)",
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(app-containers/waydroid/waydroid-1.6.1.ebuild )",
+      "Bash(app-forensics/libewf/libewf-20240506.ebuild )",
+      "Bash(app-office/insync/insync-3.9.7.60031.ebuild )",
+      "Bash(games-util/geforcenow-electron/geforcenow-electron-2.2.0.ebuild )",
+      "Bash(net-misc/nomachine/nomachine-8.16.1.1.ebuild )",
+      "Bash(net-misc/nxplayer/nxplayer-8.16.1.1.ebuild )",
+      "Bash(net-proxy/zaproxy/zaproxy-2.17.0.ebuild )",
+      "Bash(sys-kernel/dkms/dkms-3.3.0.ebuild )",
+      "Bash(net-ftp/filezillapro/filezillapro-3.55.1.ebuild )",
+      "Bash(www-client/brave-bin/brave-bin-1.85.116.ebuild )",
+      "Bash(www-client/brave-bin/brave-bin-1.85.118.ebuild)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(sudo emaint sync:*)",
+      "Bash(emerge -s:*)",
+      "Bash(eix -e:*)",
+      "Bash(emerge:*)",
+      "Bash(sudo eix-update:*)"
+    ]
+  }
+}

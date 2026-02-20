@@ -101,12 +101,8 @@ src_prepare() {
 	mv brave-browser{,-stable}.desktop || die "Failed to rename desktop file"
 	popd >/dev/null || die
 
-	# Modify wrapper
-	pushd usr/bin >/dev/null || die
-	sed -e 's|brave-browser-stable|brave-bin|g' \
-		-e 's|/usr/bin/brave-browser|/opt/brave.com/brave/brave|g' \
-		-i brave-browser-stable || die "Failed to modify wrapper"
-	popd >/dev/null || die
+	# Remove upstream wrapper (we create our own)
+	rm usr/bin/brave-browser-stable || die "Failed to remove wrapper symlink"
 
 	# Rename directories
 	mv usr/share/doc/{brave-browser,${PF}} || die "Failed to rename doc directory"
