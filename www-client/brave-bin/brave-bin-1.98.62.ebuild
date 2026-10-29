@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -160,12 +160,13 @@ src_install() {
 		# Distributed under the terms of the GNU General Public License v2
 
 		# Allow users to override command-line options
-		if [[ -f ~/.config/brave-flags.conf ]]; then
-		   BRAVE_FLAGS="\$(grep -v '^#' ~/.config/brave-flags.conf | tr '\n' ' ')"
+		flags_file="\${XDG_CONFIG_HOME:-\$HOME/.config}/brave-flags.conf"
+		if [ -r "\${flags_file}" ]; then
+			BRAVE_FLAGS="\$(grep -v '^#' "\${flags_file}" | tr '\\n' ' ')"
 		fi
 
-		# Launch Brave
-		exec /opt/brave.com/brave/brave "\${BRAVE_FLAGS}" "\$@"
+		# Launch Brave (BRAVE_FLAGS is deliberately unquoted so each flag is its own argument)
+		exec /opt/brave.com/brave/brave \${BRAVE_FLAGS} "\$@"
 	EOF
 	fperms +x /usr/bin/brave-bin
 
