@@ -8,6 +8,7 @@ For every [section] named like an ebuild package (category/name) in
   3. if upstream is newer, one Forgejo issue "update-check: <cat/pkg> <ver>" is
      opened (deduplicated against open AND closed issues, so a closed issue
      is never re-opened or repeated for the same version).
+SELFTEST_OLD=cat/pkg=ver fakes an old version (workflow selftest).
 A broken source (nvchecker error) opens/keeps one issue "update-check: source
 broken: <cat/pkg>" instead of failing the job.
 
@@ -64,6 +65,9 @@ def existing_titles():
 def main():
     pkgs = sections(CFG)
     old = {p: newest_ebuild(p) for p in pkgs}
+    if os.environ.get("SELFTEST_OLD"):  # workflow_dispatch selftest: pretend an old version to exercise issue creation
+        p_, v_ = os.environ["SELFTEST_OLD"].split("=")
+        old[p_] = v_
     tmp = tempfile.mkdtemp()
     oldf, newf = f"{tmp}/old.json", f"{tmp}/new.json"
     json.dump({"version": 2, "data": {p: {"version": v} for p, v in old.items() if v}}, open(oldf, "w"))
