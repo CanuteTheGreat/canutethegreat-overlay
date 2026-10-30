@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<use>
+		<flag name="fuse">Build ewfmount (mount EWF images through FUSE)</flag>
+		<flag name="uuid">Use libuuid for GUID generation</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">libyal/libewf</remote-id>
+	</upstream>
+</pkgmetadata>
