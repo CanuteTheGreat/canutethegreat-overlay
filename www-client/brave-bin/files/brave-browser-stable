@@ -1,0 +1,30 @@
+#!/bin/sh
+# Gentoo wrapper for Brave: prepend the flags listed in
+# ${XDG_CONFIG_HOME:-~/.config}/brave-flags.conf (one or more per line, lines
+# starting with '#' are comments), then hand over to upstream's launcher.
+
+flags_file="${XDG_CONFIG_HOME:-${HOME}/.config}/brave-flags.conf"
+
+if [ -r "${flags_file}" ]; then
+	nargs=$#
+	set -f	# no pathname expansion while word-splitting flag lines
+	while IFS= read -r line || [ -n "${line}" ]; do
+		line=${line#"${line%%[![:space:]]*}"}	# strip leading blanks
+		case ${line} in
+			''|'#'*) continue ;;
+		esac
+		for flag in ${line}; do
+			set -- "$@" "${flag}"
+		done
+	done < "${flags_file}"
+	set +f
+	# Rotate the original arguments behind the file flags, preserving
+	# them verbatim (including empty ones).
+	while [ "${nargs}" -gt 0 ]; do
+		set -- "$@" "$1"
+		shift
+		nargs=$((nargs - 1))
+	done
+fi
+
+exec /opt/brave.com/brave/brave-browser "$@"

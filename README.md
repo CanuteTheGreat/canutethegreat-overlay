@@ -18,7 +18,7 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 
 | Package | Version | Notes |
 |---|---|---|
-| `www-client/brave-bin` | 1.98.62 | upstream .deb, amd64/arm64; sandbox needs USER_NS/PID_NS/NET_NS/SECCOMP in the kernel |
+| `www-client/brave-bin` | 1.98.62-r1 | upstream .deb, amd64/arm64; sandbox needs USER_NS/PID_NS/NET_NS/SECCOMP in the kernel |
 | `app-misc/alienfx` | 2.4.3, 9999 | Alienware lighting; 9999 (git master, python >= 3.14) carries the `187c:0551` rule. The udev rules use `TAG+="uaccess"` (logged-in seat user, needs systemd-logind/elogind) instead of upstream's world-writable `MODE 666`; the sysfs `chmod 666` rule for the Alpha ASM100 is dropped |
 | `app-forensics/libewf` | 20260924 | libewf-experimental |
 | `games-util/geforcenow-electron` | 3.0.6 | |

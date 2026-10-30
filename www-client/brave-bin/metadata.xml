@@ -6,10 +6,6 @@
 		<name>Ronald Farrer</name>
 		<description>Primary maintainer</description>
 	</maintainer>
-	<maintainer type="project">
-		<email>proxy-maint@gentoo.org</email>
-		<name>Proxy Maintainers</name>
-	</maintainer>
 	<longdescription lang="en">
 		Brave is a free and open-source web browser developed by Brave Software, Inc.
 		based on the Chromium web browser. It blocks ads and website trackers, and
@@ -32,16 +28,9 @@
 		official GitHub repository, providing faster installation and updates compared
 		to building from source.
 
-		NOTE: This binary package includes ALL optional components (Brave Rewards,
-		Brave Wallet, Tor, VPN support, etc.) pre-compiled. These features can be
-		enabled or disabled through Brave's settings interface at runtime. For
-		build-time control of optional components, use www-client/brave-browser instead.
 	</longdescription>
 	<use>
-		<flag name="keyring">
-			Enable support for storing passwords in the system keyring
-			(GNOME Keyring, KWallet, etc.) via app-crypt/libsecret
-		</flag>
+		<flag name="qt6">Install the Qt6 shim so Brave can follow the Qt6 platform theme</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">brave/brave-browser</remote-id>
