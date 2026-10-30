@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,7 +7,7 @@ inherit unpacker xdg-utils
 
 DESCRIPTION="Powerful modern download accelerator and organizer for Windows and Mac"
 HOMEPAGE="https://www.freedownloadmanager.org/"
-SRC_URI="https://files2.freedownloadmanager.org/6/latest/${PN}.deb"
+SRC_URI="https://files2.freedownloadmanager.org/6/latest/${PN}.deb -> ${P}.deb"
 
 LICENSE="FDM"
 SLOT="0"
@@ -19,7 +19,15 @@ RESTRICT="bindist mirror strip"
 RDEPEND="
 	>=dev-libs/openssl-1.1.1:0=
 	>=media-video/ffmpeg-4.0:0=
-	>=net-libs/libtorrent-rasterbar-1.2.0:0=
+	app-arch/brotli:=
+	app-crypt/mit-krb5
+	media-libs/libpulse
+	sys-apps/bubblewrap
+	dev-libs/wayland
+	x11-libs/libxkbcommon[X]
+	x11-libs/xcb-util-cursor
+	x11-libs/xcb-util-keysyms
+	x11-libs/xcb-util-wm
 	x11-misc/xdg-utils
 	gstreamer? (
 		media-libs/gst-plugins-base:1.0
@@ -42,9 +50,10 @@ BDEPEND="
 S="${WORKDIR}"
 
 QA_PREBUILT="opt/freedownloadmanager/*"
+QA_PRESTRIPPED="opt/freedownloadmanager/*"
 
 src_unpack() {
-	unpack_deb "${DISTDIR}/${PN}.deb"
+	unpack_deb "${DISTDIR}/${P}.deb"
 }
 
 src_prepare() {
@@ -59,13 +68,9 @@ src_prepare() {
 }
 
 src_install() {
-	# Install main application files
-	insinto /opt
-	doins -r opt/freedownloadmanager
-
-	# Make binaries executable
-	fperms +x /opt/freedownloadmanager/fdm
-	fperms +x /opt/freedownloadmanager/fdmextension
+	# Bundled Qt6 and plugins: keep upstream file modes
+	dodir /opt
+	cp -a opt/freedownloadmanager "${ED}"/opt/ || die
 
 	# Create symlink for main executable
 	dosym -r /opt/freedownloadmanager/fdm /usr/bin/fdm
