@@ -1,5 +1,10 @@
 # nvchecker sources for canutethegreat-overlay. Section name = category/package.
 
+["www-client/brave"]
+# source build: newest Brave *release* whose pinned Chromium exists in ::gentoo's www-client/chromium
+source = "cmd"
+cmd = "python3 .ci/brave-source-latest.py"
+
 ["www-client/brave-bin"]
 source = "github"
 github = "brave/brave-browser"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<use>
+		<flag name="gtk4">Build with GTK4 headers.</flag>
+		<flag name="pax-kernel">Allow building on a PaX-enabled kernel</flag>
+		<flag name="screencast">Enable WebRTC screen capture through PipeWire (Wayland)</flag>
+		<flag name="system-harfbuzz">Use system <pkg>media-libs/harfbuzz</pkg> instead of the bundled library.</flag>
+		<flag name="system-zstd">Use system <pkg>app-arch/zstd</pkg> instead of the bundled one.</flag>
+		<flag name="widevine">Enable the Widevine CDM loader (the CDM itself is downloaded by the component updater at runtime)</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">brave/brave-core</remote-id>
+		<remote-id type="github">brave/brave-browser</remote-id>
+	</upstream>
+</pkgmetadata>
