@@ -8,7 +8,7 @@
 	<use>
 		<flag name="ada">Build the Ada language (GNAT) frontend</flag>
 		<flag name="algol68">Build the Algol 68 frontend</flag>
-		<flag name="cet" restrict="&gt;=sys-devel/gcc-10">
+		<flag name="cet" restrict="&gt;=cross-x86_64-unknown-linux-musl/gcc-10">
 			Enable support for control flow hijacking protection.
 
 			On amd64, this provides Intel Control Flow Enforcement Technology (CET).
