@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Weekly upstream update check for a Gentoo overlay (stdlib + nvchecker).
+"""Daily upstream update check for a Gentoo overlay (stdlib + nvchecker).
 
 For every [section] named like an ebuild package (category/name) in
 .nvchecker/nvchecker.toml:

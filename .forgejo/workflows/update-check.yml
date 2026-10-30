@@ -1,9 +1,9 @@
-# Weekly: ask upstream for the newest release of every package listed in
+# Daily: ask upstream for the newest release of every package listed in
 # .nvchecker/nvchecker.toml and open one issue per new version (deduplicated).
 name: update-check
 on:
   schedule:
-    - cron: "17 6 * * 1"
+    - cron: "17 6 * * *"
   workflow_dispatch:
     inputs:
       selftest_pkg:
