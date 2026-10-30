@@ -1,6 +1,5 @@
 app-forensics
 app-misc
-cross-x86_64-unknown-linux-musl
 games-util
 net-fs
 net-misc

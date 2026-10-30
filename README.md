@@ -25,7 +25,6 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `net-misc/freedownloadmanager` | 6.35.2.7075 | upstream only publishes an unversioned "latest" .deb: the Manifest breaks when FDM updates |
 | `net-fs/goofys-bin` | 0.24.0 | upstream binary (no source package any more) |
 | `net-proxy/zaproxy` | 2.17.0 | |
-| `cross-x86_64-unknown-linux-musl/*` | binutils 2.47, gcc 13.5.0/14.4.1/15.3.1/16.2.1, gdb 18.1, linux-headers 7.1, musl 1.2.6 | snapshot of what `crossdev -t x86_64-unknown-linux-musl` generates (links to ::gentoo dereferenced, newest per slot + live); regenerate with `.ci/regen-cross.py`; verified by building the toolchain and a static hello world |
 
 Removed (replaced by ::gentoo/GURU or another package, or no longer maintained here): `sys-kernel/dkms` (::gentoo),
 `app-containers/waydroid` (GURU carries 1.6.3: `eselect repository enable guru`), `www-client/brave-browser`
@@ -38,3 +37,6 @@ Removed (replaced by ::gentoo/GURU or another package, or no longer maintained h
   upstream with the newest ebuild and opens one issue per new version.
 * `.forgejo/workflows/pkgcheck.yml` (push/PR): `pkgcheck scan -k error` in a Gentoo stage3 container on the rw-man runners;
   accepted exceptions are in `.ci/pkgcheck-skip.txt`.
+
+## Cross toolchains
+Not kept here. `crossdev` writes generated `cross-*` ebuilds into the highest-priority overlay when no dedicated crossdev repo exists; that is how a musl toolchain ended up in this overlay (removed 2026-10-29). Create one locally with a dedicated repo instead: `eselect repository create crossdev && crossdev --target x86_64-unknown-linux-musl`.
