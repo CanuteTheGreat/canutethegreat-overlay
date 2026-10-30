@@ -5,7 +5,8 @@ set -eu
 cd "$(dirname "$0")/.."
 name="pkgcheck-$$-$(date +%s)"
 trap 'docker rm -f "$name" >/dev/null 2>&1 || true' EXIT
-docker run --rm --name "$name" --memory=6g --cpus=4 -v "$PWD:/src:ro" gentoo/stage3:amd64-openrc sh -euc '
+# bind mounts do not work from a job container (the daemon is the host's): docker cp instead
+docker create --name "$name" --memory=6g --cpus=4 gentoo/stage3:amd64-openrc sh -euc '
   emerge-webrsync -q >/dev/null
   getuto >/dev/null 2>&1
   echo "FEATURES=\"getbinpkg binpkg-request-signature\"" >> /etc/portage/make.conf
@@ -18,3 +19,5 @@ docker run --rm --name "$name" --memory=6g --cpus=4 -v "$PWD:/src:ro" gentoo/sta
   printf "[%s]\nlocation = /work\n" "$repo" > /etc/portage/repos.conf/overlay.conf
   pkgcheck scan --repo "$repo" -k error -R JsonStream | python3 .ci/pkgcheck-filter.py .ci/pkgcheck-skip.txt
 '
+docker cp "$PWD/." "$name:/src"
+docker start -a "$name"
