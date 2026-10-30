@@ -3,7 +3,7 @@
 <repositories version="1.0">
 	<repo quality="experimental" status="unofficial">
 		<name>canutethegreat-overlay</name>
-		<description lang="en">Personal ebuilds: brave-bin, alienfx, waydroid, insync, libewf, freedownloadmanager, zaproxy and more.</description>
+		<description lang="en">Personal ebuilds: brave-bin, alienfx, geforcenow-electron, freedownloadmanager, zaproxy, libewf, goofys-bin and a musl cross toolchain.</description>
 		<homepage>https://github.com/CanuteTheGreat/canutethegreat-overlay</homepage>
 		<owner type="person">
 			<email>canutethegreat@gmail.com</email>

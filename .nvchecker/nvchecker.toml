@@ -1,7 +1,4 @@
 # nvchecker sources for canutethegreat-overlay. Section name = category/package.
-# Not monitored: sys-kernel/dkms, www-client/brave-browser, net-fs/goofys, nxplayer,
-# cross-*/ (proposed for removal / crossdev-generated) and the vendor-gated
-# packages nomachine, overgrive, filezillapro (no machine-readable upstream, listed in README).
 
 ["www-client/brave-bin"]
 source = "github"
@@ -14,11 +11,6 @@ source = "github"
 github = "trackmastersteve/alienfx"
 use_latest_release = true
 prefix = "v"
-
-["app-containers/waydroid"]
-source = "github"
-github = "waydroid/waydroid"
-use_latest_release = true
 
 ["app-forensics/libewf"]
 source = "github"
@@ -44,23 +36,7 @@ github = "zaproxy/zaproxy"
 use_latest_release = true
 prefix = "v"
 
-["app-office/insync"]
-source = "apt"
-mirror = "https://apt.insync.io/ubuntu"
-suite = "noble"
-repo = "non-free"
-pkg = "insync"
-arch = "amd64"
-from_pattern = '^(.*)-noble$'
-to_pattern = '\1'
-
 ["net-misc/freedownloadmanager"]
 # the unversioned 'latest' .deb is the only download; read its control file
 source = "cmd"
 cmd = "d=$(mktemp -d) && curl -fsSL -o $d/fdm.deb https://files2.freedownloadmanager.org/6/latest/freedownloadmanager.deb && ar p $d/fdm.deb control.tar.xz | tar xJO ./control | sed -n 's/^Version: //p'; rm -rf $d"
-
-["app-mobilephone/easytether"]
-source = "regex"
-url = "https://www.mobile-stream.com/easytether/drivers.html"
-verify_cert = false
-regex = 'easytether_([0-9]+\.[0-9]+\.[0-9]+)_amd64\.deb'

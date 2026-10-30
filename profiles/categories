@@ -1,13 +1,8 @@
-app-containers
 app-forensics
 app-misc
-app-mobilephone
-app-office
 cross-x86_64-unknown-linux-musl
 games-util
 net-fs
-net-ftp
 net-misc
 net-proxy
-sys-kernel
 www-client
