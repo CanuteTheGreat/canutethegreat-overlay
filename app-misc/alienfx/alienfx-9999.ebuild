@@ -1,9 +1,9 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_14 )
 DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1 udev git-r3
@@ -17,6 +17,7 @@ SLOT="0"
 IUSE="gtk"
 
 RDEPEND="
+	dev-libs/libusb:1
 	>=dev-python/pyusb-1.2.1[${PYTHON_USEDEP}]
 	gtk? (
 		dev-python/pygobject:3[${PYTHON_USEDEP},cairo]
@@ -28,41 +29,12 @@ RDEPEND="
 # but these are unnecessary for Python 3 and the package works without it.
 # dev-python/future is also not available in Gentoo as Python 2 is EOL.
 
-BDEPEND="
-	dev-python/setuptools[${PYTHON_USEDEP}]
-"
-
 DOCS=( README.md CONTRIBUTING.md )
 
 python_prepare_all() {
-	# Remove automatic udev rules installation from setup.py
-	# as we'll handle it properly through the ebuild
-	# Delete lines 80-92 (the udev rules copying code after setup())
-	sed -i -e '80,92d' setup.py || die "Failed to patch setup.py"
-
-	# Fix GTK UI to not require python-future package
-	# Replace old_div() calls with Python 3 native division
-	python3 - << 'EOF' || die "Failed to patch action_renderer.py"
-import re
-
-with open('alienfx/ui/gtkui/action_renderer.py', 'r') as f:
-    content = f.read()
-
-# Remove the import
-content = re.sub(r'from past\.utils import old_div\n', '', content)
-
-# Replace old_div with floor division or true division
-# For float division: old_div(float(x), y) -> float(x) / y
-content = re.sub(r'old_div\(float\(([^)]+)\),\s*([^)]+)\)',
-                 r'float(\1) / \2', content)
-
-# For everything else: old_div(a, b) -> a // b
-content = re.sub(r'old_div\(([^,]+),\s*([^)]+)\)',
-                 r'(\1) // (\2)', content, flags=re.MULTILINE)
-
-with open('alienfx/ui/gtkui/action_renderer.py', 'w') as f:
-    f.write(content)
-EOF
+	# Drop setup.py's own udev rule installation (written to /etc at
+	# build time, bypasses the sandbox); the ebuild installs it below.
+	sed -i -e '/^# Copy the udev rules file/,$d' setup.py || die
 
 	distutils-r1_python_prepare_all
 }
@@ -86,11 +58,7 @@ python_install_all() {
 pkg_postinst() {
 	udev_reload
 
-	elog "AlienFX live ebuild (git master) has been installed."
-	elog ""
-	elog "This version includes support for all devices in git master,"
-	elog "including the Alienware M18R2 (USB ID 187c:0551) which was"
-	elog "added after the 2.4.3 release."
+	elog "AlienFX has been installed."
 	elog ""
 	elog "After installation, you may need to reload udev rules:"
 	elog "  # udevadm control --reload-rules"
