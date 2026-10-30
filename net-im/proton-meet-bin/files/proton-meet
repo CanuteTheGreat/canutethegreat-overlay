@@ -1,0 +1,10 @@
+#!/bin/sh
+# Wrapper for Proton Meet (Gentoo): reads extra flags from
+# ${XDG_CONFIG_HOME:-~/.config}/proton-meet-flags.conf, one or more per line, '#' = comment.
+conf="${XDG_CONFIG_HOME:-$HOME/.config}/proton-meet-flags.conf"
+flags=""
+if [ -r "$conf" ]; then
+	flags=$(sed -e 's/#.*//' "$conf" | tr '\n' ' ')
+fi
+# shellcheck disable=SC2086
+exec "/opt/proton-meet/Proton Meet Beta" --ozone-platform-hint=auto $flags "$@"

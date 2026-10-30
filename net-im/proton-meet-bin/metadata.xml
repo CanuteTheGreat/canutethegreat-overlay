@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		Proton Meet desktop app (Electron), repackaged from Proton's official .deb.
+		Unofficial Gentoo packaging; not affiliated with Proton AG.
+	</longdescription>
+</pkgmetadata>

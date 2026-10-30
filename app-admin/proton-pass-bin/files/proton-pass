@@ -1,0 +1,10 @@
+#!/bin/sh
+# Wrapper for Proton Pass (Gentoo): reads extra flags from
+# ${XDG_CONFIG_HOME:-~/.config}/proton-pass-flags.conf, one or more per line, '#' = comment.
+conf="${XDG_CONFIG_HOME:-$HOME/.config}/proton-pass-flags.conf"
+flags=""
+if [ -r "$conf" ]; then
+	flags=$(sed -e 's/#.*//' "$conf" | tr '\n' ' ')
+fi
+# shellcheck disable=SC2086
+exec "/opt/proton-pass/Proton Pass" --ozone-platform-hint=auto $flags "$@"

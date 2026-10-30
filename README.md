@@ -25,6 +25,12 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `net-misc/freedownloadmanager` | 6.35.2.7075 | upstream only publishes an unversioned "latest" .deb: the Manifest breaks when FDM updates |
 | `net-fs/goofys-bin` | 0.24.0 | upstream binary (no source package any more) |
 | `net-proxy/zaproxy` | 2.17.0 | |
+| `app-admin/proton-pass-bin` | 1.43.0 | Proton Pass desktop (Electron), upstream .deb, amd64 only; wrapper reads `~/.config/proton-pass-flags.conf` |
+| `app-admin/proton-pass-cli-bin` | 2.6.0 | Proton Pass CLI, official prebuilt binary (amd64/arm64) |
+| `net-im/proton-meet-bin` | 1.0.14 | Proton Meet desktop (Electron), upstream .deb, amd64 only |
+| `sys-auth/proton-authenticator-bin` | 1.1.6 | Proton Authenticator (Tauri), upstream .deb, amd64 only |
+| `net-fs/proton-drive-cli-bin` | 0.9.0 | Proton Drive CLI, official prebuilt binary (amd64/arm64) |
+| `mail-client/proton-mail-export-bin` | 1.0.7 | Proton Mail Export Tool CLI (amd64) |
 
 Removed (replaced by ::gentoo/GURU or another package, or no longer maintained here): `sys-kernel/dkms` (::gentoo),
 `app-containers/waydroid` (GURU carries 1.6.3: `eselect repository enable guru`), `www-client/brave-browser`
@@ -40,3 +46,10 @@ Removed (replaced by ::gentoo/GURU or another package, or no longer maintained h
 
 ## Cross toolchains
 Not kept here. `crossdev` writes generated `cross-*` ebuilds into the highest-priority overlay when no dedicated crossdev repo exists; that is how a musl toolchain ended up in this overlay (removed 2026-10-29). Create one locally with a dedicated repo instead: `eselect repository create crossdev && crossdev --target x86_64-unknown-linux-musl`.
+
+## Proton apps
+Official Linux builds only. Not duplicated here because ::gentoo/GURU already carry them: `mail-mta/proton-mail-bridge`
+(::gentoo, source build), `net-vpn/proton-vpn-gtk-app` (GURU, with its `dev-python/proton-*` deps) and
+`mail-client/proton-mail-bin` (GURU, desktop Mail+Calendar; often behind upstream). No official Linux desktop app exists for
+Proton Drive (CLI only), Wallet (mobile/web), Docs, Sheets or Calendar (Calendar is inside the Mail desktop app).
+Versions are tracked by `.ci/proton-latest.py` (reads proton.me/download metadata) in `.nvchecker/nvchecker.toml`.

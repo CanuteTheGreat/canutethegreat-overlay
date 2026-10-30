@@ -40,3 +40,30 @@ prefix = "v"
 # the unversioned 'latest' .deb is the only download; read its control file
 source = "cmd"
 cmd = "d=$(mktemp -d) && curl -fsSL -o $d/fdm.deb https://files2.freedownloadmanager.org/6/latest/freedownloadmanager.deb && ar p $d/fdm.deb control.tar.xz | tar xJO ./control | sed -n 's/^Version: //p'; rm -rf $d"
+
+# Proton apps: official Linux builds, version read from proton.me/download metadata (.ci/proton-latest.py)
+["app-admin/proton-pass-bin"]
+source = "cmd"
+cmd = "python3 .ci/proton-latest.py pass"
+
+["net-im/proton-meet-bin"]
+source = "cmd"
+cmd = "python3 .ci/proton-latest.py meet"
+
+["sys-auth/proton-authenticator-bin"]
+source = "cmd"
+cmd = "python3 .ci/proton-latest.py authenticator"
+
+["app-admin/proton-pass-cli-bin"]
+source = "cmd"
+cmd = "python3 .ci/proton-latest.py pass-cli"
+
+["net-fs/proton-drive-cli-bin"]
+source = "cmd"
+cmd = "python3 .ci/proton-latest.py drive-cli"
+
+["mail-client/proton-mail-export-bin"]
+source = "github"
+github = "ProtonMail/proton-mail-export"
+use_latest_release = true
+prefix = "v"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		Proton Mail Export Tool, Proton's official command-line backup tool, repackaged from the
+		prebuilt release on GitHub. Unofficial Gentoo packaging; not affiliated with Proton AG.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">ProtonMail/proton-mail-export</remote-id>
+	</upstream>
+</pkgmetadata>
