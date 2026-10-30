@@ -1,0 +1,22 @@
+# Weekly: ask upstream for the newest release of every package listed in
+# .nvchecker/nvchecker.toml and open one issue per new version (deduplicated).
+name: update-check
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch: {}
+jobs:
+  check:
+    runs-on: colo-light-x86_64
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: nvchecker
+        env:
+          FORGEJO_API: ${{ github.server_url }}/api/v1
+          FORGEJO_REPO: ${{ github.repository }}
+          FORGEJO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 -m venv "$RUNNER_TEMP/nv"
+          "$RUNNER_TEMP/nv/bin/pip" install -q nvchecker aiohttp
+          PATH="$RUNNER_TEMP/nv/bin:$PATH" python3 .ci/update-check.py

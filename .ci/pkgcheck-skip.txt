@@ -1,0 +1,7 @@
+# packages (all errors) or package:Class that pkgcheck is not expected to pass yet; every entry is explained in README.md
+sys-kernel/dkms                        # superseded by ::gentoo, proposed for removal
+www-client/brave-browser               # source build does not even source (LLVM_COMPAT), proposed for removal
+net-misc/nomachine                     # vendor URL returns the homepage: no Manifest possible until the owner supplies the file
+net-misc/nxplayer                      # same, and redundant with nomachine[nxplayer]
+app-office/overgrive:MissingManifest   # RESTRICT=fetch (licensed download)
+net-ftp/filezillapro:MissingManifest   # RESTRICT=fetch (licensed download)

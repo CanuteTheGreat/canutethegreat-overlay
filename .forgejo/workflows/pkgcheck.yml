@@ -1,0 +1,14 @@
+name: pkgcheck
+on:
+  push:
+    branches: [master]
+    paths: ["**/*.ebuild", "**/Manifest", "**/metadata.xml", "profiles/**", "metadata/**", ".ci/**", ".forgejo/workflows/pkgcheck.yml"]
+  pull_request: {}
+  workflow_dispatch: {}
+jobs:
+  pkgcheck:
+    runs-on: linux-cross-x86_64
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh .ci/pkgcheck.sh
