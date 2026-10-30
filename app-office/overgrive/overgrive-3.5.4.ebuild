@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -15,8 +15,7 @@ SRC_URI="${PN}_${PV}.deb"
 
 SLOT="0"
 RESTRICT="fetch strip mirror" # mirror as explained at bug #547372
-LICENSE="fanclub-EULA"
-IUSE=""
+LICENSE="all-rights-reserved"
 
 RDEPEND="
 	dev-libs/libappindicator

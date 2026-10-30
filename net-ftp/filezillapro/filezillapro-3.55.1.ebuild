@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,6 +14,7 @@ DESCRIPTION="Commercial verison of FileZilla"
 HOMEPAGE="https://filezillapro.com/"
 SRC_URI="https://filezillapro.com/FileZilla_Pro_${PV}_x86_64-linux-gnu.tar.bz2"
 
+LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64"
 
@@ -28,7 +29,7 @@ RDEPEND="
 	>=x11-libs/wxGTK-3.2:${WX_GTK_VER}[X]
 	x11-misc/xdg-utils"
 DEPEND="${RDEPEND}"
-RESTRICT="fetch"
+RESTRICT="bindist fetch mirror"
 
 S="${WORKDIR}"
 
@@ -70,4 +71,3 @@ pkg_postrm() {
 	xdg_mimeinfo_database_update
 	xdg_icon_cache_update
 }
-

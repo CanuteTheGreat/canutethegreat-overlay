@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -18,8 +18,7 @@ SRC_URI="amd64? ( http://www.mobile-stream.com/beta/ubuntu/18.04/easytether_${PV
 
 SLOT="0"
 RESTRICT="strip mirror" # mirror as explained at bug #547372
-LICENSE="easytether-EULA"
-IUSE=""
+LICENSE="all-rights-reserved"
 
 NATIVE_DEPEND=""
 
@@ -27,7 +26,6 @@ RDEPEND="
 	${NATIVE_DEPEND}
 "
 
-DEPEND=""
 
 S="${WORKDIR}"
 

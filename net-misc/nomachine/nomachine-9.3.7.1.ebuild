@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,8 +20,6 @@ KEYWORDS="~amd64 ~arm64"
 IUSE="+nxserver +nxnode +nxrunner +nxplayer systemd"
 RESTRICT="strip"
 
-DEPEND=""
-BDEPEND=""
 RDEPEND="dev-libs/glib:2
 		sys-libs/libudev-compat
 		virtual/libcrypt:0
