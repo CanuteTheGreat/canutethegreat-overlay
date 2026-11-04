@@ -84,3 +84,8 @@ cmd = "curl -fsSL https://api.caido.io/releases/latest | python3 -c 'import json
 source = "github"
 github = "Spagett1/PineFlash"
 use_latest_release = true
+
+["app-misc/qflipper"]
+source = "github"
+github = "flipperdevices/qFlipper"
+use_latest_release = true

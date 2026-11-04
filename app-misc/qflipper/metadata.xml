@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		qFlipper: desktop application (qFlipper) and CLI (qFlipper-cli) for
+		updating firmware and managing Flipper Zero devices. Built from source
+		with Qt6; installs the upstream udev rules (uaccess).
+	</longdescription>
+	<upstream>
+		<remote-id type="github">flipperdevices/qFlipper</remote-id>
+	</upstream>
+</pkgmetadata>
