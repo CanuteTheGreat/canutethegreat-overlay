@@ -67,3 +67,7 @@ source = "github"
 github = "ProtonMail/proton-mail-export"
 use_latest_release = true
 prefix = "v"
+
+["media-video/davinci-resolve"]
+source = "cmd"
+cmd = "python3 .ci/resolve-latest.py"

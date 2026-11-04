@@ -1,1 +1,2 @@
 # packages (all errors) or package:Class that pkgcheck is not expected to pass; see README.md
+media-video/davinci-resolve*:MissingManifest  # fetch-restricted proprietary archive: no public URL (Blackmagic registration form), Manifest is created by the user

@@ -23,6 +23,8 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `app-forensics/libewf` | 20260924 | libewf-experimental |
 | `games-util/geforcenow-electron` | 3.0.6 | |
 | `net-misc/freedownloadmanager` | 6.35.2.7075 | upstream only publishes an unversioned "latest" .deb: the Manifest breaks when FDM updates |
+| `games-util/steam-overlay-config` | 1 | opt-in, **HOGSMEADE only**: registers `::steam-overlay` in repos.conf + `package.use` (abi_x86_32 for Steam/NVIDIA deps), keywords, Valve licence; then `games-util/steam-launcher` comes from steam-overlay. Not in any Horcrux image |
+| `media-video/davinci-resolve`, `media-video/davinci-resolve-studio` | 21.1.2 | **fetch-restricted**, you download the archive by hand (see below); free / Studio edition, block each other; eclass `davinci-resolve` |
 | `net-fs/goofys-bin` | 0.24.0 | upstream binary (no source package any more) |
 | `net-proxy/zaproxy` | 2.17.0 | |
 | `app-admin/proton-pass-bin` | 1.43.0 | Proton Pass desktop (Electron), upstream .deb, amd64 only; wrapper reads `~/.config/proton-pass-flags.conf` |
@@ -36,6 +38,37 @@ Removed (replaced by ::gentoo/GURU or another package, or no longer maintained h
 `app-containers/waydroid` (GURU carries 1.6.3: `eselect repository enable guru`), `www-client/brave-browser`
 (use `brave-bin`), `net-fs/goofys` (use `goofys-bin`), `net-misc/nxplayer`, `net-misc/nomachine`, `app-office/overgrive`,
 `net-ftp/filezillapro`, `app-office/insync`, `app-mobilephone/easytether`.
+
+## DaVinci Resolve (`media-video/davinci-resolve`, `media-video/davinci-resolve-studio`)
+Proprietary, `RESTRICT=fetch`: Blackmagic only gives the archive out after a registration form (name, e-mail, ...), so there is
+no scripted download and no Manifest in this overlay (thin Manifests, and a placeholder DIST would be a lie). Once per version:
+
+1. Open <https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion>, choose **DaVinci Resolve** (free) or
+   **DaVinci Resolve Studio**, version = the ebuild version (`21.1.2`), platform **Linux**, fill in the form.
+2. Put the download into DISTDIR (`portageq distdir`, normally `/var/cache/distfiles`) under exactly this name:
+   `DaVinci_Resolve_21.1.2_Linux.zip` (free) or `DaVinci_Resolve_Studio_21.1.2_Linux.zip` (Studio).
+3. `ebuild "$(portageq get_repo_path / canutethegreat-overlay)"/media-video/davinci-resolve/davinci-resolve-21.1.2.ebuild manifest`
+   (same with `davinci-resolve-studio`), then `emerge -av media-video/davinci-resolve` (`ACCEPT_LICENSE` must allow
+   `all-rights-reserved`: `echo 'media-video/davinci-resolve* all-rights-reserved' >> /etc/portage/package.license/resolve`).
+4. `gpasswd -a $USER video`, log in again (licence/log/cache dirs below `/opt/davinci-resolve` are `root:video` 0775).
+   Studio: activate with the dongle, Blackmagic Cloud licence or activation code.
+
+GPU: `VIDEO_CARDS` decides the compute stack (`nvidia` -> `x11-drivers/nvidia-drivers` for CUDA+OpenCL, `amdgpu` -> ROCm OpenCL,
+`intel` -> intel-compute-runtime); at least one is required. RTX 50xx (Blackwell) needs the open kernel modules. The package is
+`strip`/`QA_PREBUILT` (bundled Qt/ffmpeg), RPATHs with Blackmagic's build paths are rewritten, the bundled glib is dropped for the
+system one, the upstream world-writable (`MODE 0666`) udev rules become `TAG+="uaccess"`.
+Third-party packagings checked: gentoo-zh `media-video/davinci-resolve`, bentoo, vowstar; none is in ::gentoo or GURU.
+Tested without the real archive: the install logic was exercised against a *mock* archive with the same layout in a stage3
+(rpath rewrite, desktop Exec targets exist, icons/mime/udev installed, `udevadm verify`, USE=nvidia/amdgpu variants);
+the first run against Blackmagic's real archive may still need a path fix. nvchecker follows `.ci/resolve-latest.py`
+(Blackmagic's public downloads index).
+
+## Steam (HOGSMEADE only)
+`games-util/steam-overlay-config` registers the third-party `steam-overlay` (`games-util/steam-launcher`), writes
+`/etc/portage/package.use/steam` (`abi_x86_32` for the ~60 libraries the 32-bit client and `x11-drivers/nvidia-drivers` need),
+`package.accept_keywords/steam` and `package.license/steam` (ValveSteamLicense). Then `emaint sync -r steam-overlay` and
+`emerge -av games-util/steam-launcher`. Needs a multilib profile (`default/linux/amd64/23.0`, what Horcrux images use). Install it
+only on machines that run Steam; it is not part of any Horcrux image, profile or `horcrux-repo-config`.
 
 ## CI
 

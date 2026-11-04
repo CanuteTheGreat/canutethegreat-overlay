@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription>
+		DaVinci Resolve Studio from Blackmagic Design:
+		editing, colour, Fusion effects and Fairlight audio. Proprietary and
+		fetch-restricted: Blackmagic hands the archive out only behind a
+		registration form, so it has to be downloaded by hand (see the
+		pkg_nofetch text or the README of this overlay). This is the paid Studio edition (licence dongle, Blackmagic Cloud licence or activation code); media-video/davinci-resolve is the free one and blocks it.
+	</longdescription>
+	<use>
+		<flag name="video_cards_amdgpu">Depend on the ROCm OpenCL runtime (AMD GPUs)</flag>
+		<flag name="video_cards_intel">Depend on the Intel compute runtime (OpenCL on Intel GPUs)</flag>
+		<flag name="video_cards_nvidia">Depend on x11-drivers/nvidia-drivers (CUDA + OpenCL); keeps the Blackmagic RAW CUDA decoder</flag>
+	</use>
+</pkgmetadata>
