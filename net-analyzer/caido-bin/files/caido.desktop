@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Caido
+Comment=Web security auditing toolkit
+Exec=caido %U
+Terminal=false
+Type=Application
+Icon=caido
+StartupWMClass=Caido
+Categories=Network;Security;

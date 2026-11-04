@@ -1,0 +1,14 @@
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -2428,9 +2428,9 @@
+ 
+ [[package]]
+ name = "openssl-sys"
+-version = "0.9.88"
++version = "0.9.118"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "c2ce0f250f34a308dcfdbb351f511359857d4ed2134ba715a4eadd46e1ffd617"
++checksum = "19c413d6ec9ebaf5e1c829d355cb3e9f783778d700f135be0921d52fce3c60ae"
+ dependencies = [
+  "cc",
+  "libc",

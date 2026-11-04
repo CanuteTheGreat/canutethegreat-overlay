@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		PineFlash: egui GUI that flashes firmware to Pine64 devices (Pinecil V1 via dfu-util, Pinecil V2 and BL70x boards via blisp), built from source.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">Spagett1/PineFlash</remote-id>
+	</upstream>
+</pkgmetadata>

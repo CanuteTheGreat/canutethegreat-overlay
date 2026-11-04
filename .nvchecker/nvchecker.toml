@@ -71,3 +71,16 @@ prefix = "v"
 ["media-video/davinci-resolve"]
 source = "cmd"
 cmd = "python3 .ci/resolve-latest.py"
+
+["net-analyzer/caido-bin"]
+source = "cmd"
+cmd = "curl -fsSL https://api.caido.io/releases/latest | python3 -c 'import json,sys; print(json.load(sys.stdin)[\"version\"])'"
+
+["net-analyzer/caido-cli-bin"]
+source = "cmd"
+cmd = "curl -fsSL https://api.caido.io/releases/latest | python3 -c 'import json,sys; print(json.load(sys.stdin)[\"version\"])'"
+
+["dev-embedded/pineflash"]
+source = "github"
+github = "Spagett1/PineFlash"
+use_latest_release = true

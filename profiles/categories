@@ -1,9 +1,11 @@
 app-admin
 app-forensics
 app-misc
+dev-embedded
 games-util
 mail-client
 media-video
+net-analyzer
 net-fs
 net-im
 net-misc
