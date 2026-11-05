@@ -24,7 +24,7 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `games-util/geforcenow-electron` | 3.0.6 | |
 | `net-misc/freedownloadmanager` | 6.35.2.7075 | upstream only publishes an unversioned "latest" .deb: the Manifest breaks when FDM updates |
 | `games-util/steam-overlay-config` | 1 | opt-in, **HOGSMEADE only**: registers `::steam-overlay` in repos.conf + `package.use` (abi_x86_32 for Steam/NVIDIA deps), keywords, Valve licence; then `games-util/steam-launcher` comes from steam-overlay. Not in any Horcrux image |
-| `media-video/davinci-resolve`, `media-video/davinci-resolve-studio` | 21.1.2 | **fetch-restricted**, you download the archive by hand (see below); free / Studio edition, block each other; eclass `davinci-resolve` |
+| `media-video/davinci-resolve`, `media-video/davinci-resolve-studio` | 21.2.0 | **fetch-restricted**, you download the archive by hand (see below); free / Studio edition, block each other; eclass `davinci-resolve` |
 | `net-fs/goofys-bin` | 0.24.0 | upstream binary (no source package any more) |
 | `net-proxy/zaproxy` | 2.17.0 | |
 | `app-admin/proton-pass-bin` | 1.43.0 | Proton Pass desktop (Electron), upstream .deb, amd64 only; wrapper reads `~/.config/proton-pass-flags.conf` |
@@ -44,10 +44,10 @@ Proprietary, `RESTRICT=fetch`: Blackmagic only gives the archive out after a reg
 no scripted download and no Manifest in this overlay (thin Manifests, and a placeholder DIST would be a lie). Once per version:
 
 1. Open <https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion>, choose **DaVinci Resolve** (free) or
-   **DaVinci Resolve Studio**, version = the ebuild version (`21.1.2`), platform **Linux**, fill in the form.
+   **DaVinci Resolve Studio**, version = the ebuild version (`21.2.0`), platform **Linux**, fill in the form.
 2. Put the download into DISTDIR (`portageq distdir`, normally `/var/cache/distfiles`) under exactly this name:
-   `DaVinci_Resolve_21.1.2_Linux.zip` (free) or `DaVinci_Resolve_Studio_21.1.2_Linux.zip` (Studio).
-3. `ebuild "$(portageq get_repo_path / canutethegreat-overlay)"/media-video/davinci-resolve/davinci-resolve-21.1.2.ebuild manifest`
+   `DaVinci_Resolve_21.2.0_Linux.zip` (free) or `DaVinci_Resolve_Studio_21.2.0_Linux.zip` (Studio).
+3. `ebuild "$(portageq get_repo_path / canutethegreat-overlay)"/media-video/davinci-resolve/davinci-resolve-21.2.0.ebuild manifest`
    (same with `davinci-resolve-studio`), then `emerge -av media-video/davinci-resolve` (`ACCEPT_LICENSE` must allow
    `all-rights-reserved`: `echo 'media-video/davinci-resolve* all-rights-reserved' >> /etc/portage/package.license/resolve`).
 4. `gpasswd -a $USER video`, log in again (licence/log/cache dirs below `/opt/davinci-resolve` are `root:video` 0775).
