@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>CanuteTheGreat</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">pgbackrest/pgbackrest</remote-id>
+		<doc>https://pgbackrest.org/</doc>
+	</upstream>
+	<use>
+		<flag name="ssh">SFTP repository storage through libssh2</flag>
+	</use>
+</pkgmetadata>

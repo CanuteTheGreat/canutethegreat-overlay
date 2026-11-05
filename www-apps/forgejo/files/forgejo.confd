@@ -1,0 +1,8 @@
+# /etc/conf.d/forgejo
+GITEA_CONF="/etc/forgejo/app.ini"
+GITEA_USER="git"
+GITEA_GROUP="git"
+GITEA_WORK_DIR="/var/lib/gitea"
+GITEA_CUSTOM="${GITEA_WORK_DIR}/custom"
+# Start only after this database/cache service(s); space separated init script names that are actually installed
+#forgejo_need="postgresql-16"

@@ -1,0 +1,4 @@
+# /etc/conf.d/ntfy
+NTFY_CONFIG="/etc/ntfy/server.yml"
+# extra arguments for "ntfy serve"
+NTFY_OPTS=""

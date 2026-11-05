@@ -1,0 +1,5 @@
+# /etc/conf.d/pgbackrest
+# arguments for "pgbackrest server" (TLS server mode); the tls-server-* options live in pgbackrest.conf
+PGBACKREST_ARGS=""
+PGBACKREST_USER="postgres"
+PGBACKREST_GROUP="postgres"

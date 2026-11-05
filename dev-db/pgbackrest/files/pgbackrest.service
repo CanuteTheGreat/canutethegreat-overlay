@@ -1,0 +1,21 @@
+[Unit]
+Description=pgBackRest TLS server
+Documentation=https://pgbackrest.org/user-guide.html#repo-host
+After=network-online.target
+Wants=network-online.target
+ConditionPathExistsGlob=/etc/pgbackrest*
+
+[Service]
+Type=simple
+User=postgres
+Group=postgres
+ExecStart=/usr/bin/pgbackrest server
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+ProtectSystem=full
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

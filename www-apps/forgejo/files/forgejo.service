@@ -1,0 +1,25 @@
+[Unit]
+Description=Forgejo (self-hosted Git forge)
+Documentation=https://forgejo.org/docs/
+After=network.target
+After=postgresql.service mariadb.service mysqld.service redis.service
+AssertPathIsDirectory=/var/lib/gitea
+
+[Service]
+Type=simple
+User=git
+Group=git
+WorkingDirectory=/var/lib/gitea
+Environment=GITEA_WORK_DIR=/var/lib/gitea GITEA_CUSTOM=/var/lib/gitea/custom
+ExecStart=/usr/bin/forgejo web --config /etc/forgejo/app.ini
+Restart=always
+RestartSec=2
+Nice=5
+PrivateTmp=true
+ProtectSystem=full
+NoNewPrivileges=false
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,29 @@
+#!/sbin/openrc-run
+# Copyright 1999-2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="ntfy push notification server"
+supervisor="supervise-daemon"
+command="/usr/bin/ntfy"
+command_args="serve --no-log-dates --config ${NTFY_CONFIG:-/etc/ntfy/server.yml} ${NTFY_OPTS}"
+command_user="ntfy:ntfy"
+output_log="/var/log/ntfy/ntfy.log"
+error_log="/var/log/ntfy/ntfy.err"
+required_files="${NTFY_CONFIG:-/etc/ntfy/server.yml}"
+# like upstream's unit: may bind ports below 1024 and needs many sockets
+rc_ulimit="-n 10000"
+
+depend() {
+	need net
+	use dns logger
+}
+
+start_pre() {
+	checkpath -d -m 0750 -o ntfy:ntfy /var/lib/ntfy /var/cache/ntfy /var/log/ntfy
+}
+
+reload() {
+	ebegin "Reloading ${RC_SVCNAME}"
+	supervise-daemon "${RC_SVCNAME}" --signal HUP
+	eend $?
+}

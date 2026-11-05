@@ -1,0 +1,31 @@
+#!/sbin/openrc-run
+# Copyright 1999-2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Forgejo, a self-hosted Git service"
+
+: ${GITEA_CONF:=/etc/forgejo/app.ini}
+: ${GITEA_USER:=git}
+: ${GITEA_GROUP:=git}
+: ${GITEA_WORK_DIR:=/var/lib/gitea}
+: ${GITEA_CUSTOM:=${GITEA_WORK_DIR}/custom}
+
+supervisor="supervise-daemon"
+command="/usr/bin/forgejo"
+command_args="web --config ${GITEA_CONF}"
+command_user="${GITEA_USER}:${GITEA_GROUP}"
+directory="${GITEA_WORK_DIR}"
+output_log="/var/log/forgejo/${RC_SVCNAME}.log"
+error_log="/var/log/forgejo/${RC_SVCNAME}.err"
+required_files="${GITEA_CONF}"
+export GITEA_WORK_DIR GITEA_CUSTOM
+
+depend() {
+	need net
+	use dns logger
+	after postgresql mysql mariadb redis ${forgejo_need}
+}
+
+start_pre() {
+	checkpath -d -m 0750 -o "${GITEA_USER}:${GITEA_GROUP}" /var/log/forgejo
+}

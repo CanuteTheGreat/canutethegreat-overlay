@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>CanuteTheGreat</name>
+	</maintainer>
+	<upstream>
+		<changelog>https://codeberg.org/forgejo/forgejo/releases</changelog>
+		<bugs-to>https://codeberg.org/forgejo/forgejo/issues</bugs-to>
+		<remote-id type="codeberg">forgejo/forgejo</remote-id>
+	</upstream>
+	<use>
+		<flag name="acct">Create/own the git user and group through acct-user/git and acct-group/git</flag>
+		<flag name="pie">Build a position independent executable</flag>
+	</use>
+</pkgmetadata>
