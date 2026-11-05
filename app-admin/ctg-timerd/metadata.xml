@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person"><email>canutethegreat@gmail.com</email><name>Ronald Farrer</name></maintainer>
+	<longdescription>OpenRC stand-in for systemd timers + oneshot services (interval, calendar, persistent, jitter, graceful stop). Used by the OpenRC scripts generated for the ctg-*/yes-site packages.</longdescription>
+</pkgmetadata>
