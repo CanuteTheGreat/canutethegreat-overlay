@@ -1,0 +1,29 @@
+#!/sbin/openrc-run
+# OpenRC twin of rustinion.service (agent, resident mode).
+description="Rustinion agent (resident mode)"
+supervisor=supervise-daemon
+command=/usr/bin/rustinion
+command_args="daemon ${RUSTINION_DAEMON_ARGS}"
+# apt/dnf/pacman/emerge installs and OS-update installs need root (same as the unit's User=root)
+command_user="root:root"
+pidfile="/run/${RC_SVCNAME}.pid"
+respawn_delay=30
+respawn_max=0
+retry="TERM/30/KILL/5"
+
+depend() {
+	need net
+	after net-online
+}
+
+start_pre() {
+	# systemd twin: Environment=RUST_LOG=info, Environment="RUSTINION_DAEMON_ARGS=--interval-minutes 60",
+	# EnvironmentFile=-/etc/rustinion/daemon.env (written by `rustinion service install` / the adoption step)
+	export RUST_LOG="${RUST_LOG:-info}"
+	RUSTINION_DAEMON_ARGS="--interval-minutes 60"
+	if [ -r /etc/rustinion/daemon.env ]; then
+		set -a
+		. /etc/rustinion/daemon.env
+		set +a
+	fi
+}

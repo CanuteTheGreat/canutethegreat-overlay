@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person"><email>canutethegreat@gmail.com</email><name>Ronald Farrer</name></maintainer>
+	<longdescription>Rustinion agent (device management and monitoring). The release ebuild installs the very binaries the signed .deb ships (unpacked from the apt repo's package, hash-pinned by the Manifest); the 9999 ebuild builds the agent and the remote-access helper from source.</longdescription>
+	<use>
+		<flag name="ra-host">Install the remote-access helper (/usr/libexec/rustinion/rustinion-ra-host[-pw]) when the package ships it</flag>
+	</use>
+</pkgmetadata>
