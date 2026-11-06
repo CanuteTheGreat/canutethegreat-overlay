@@ -10,6 +10,10 @@ pidfile="/run/${RC_SVCNAME}.pid"
 respawn_delay=30
 respawn_max=0
 retry="TERM/30/KILL/5"
+# Resident daemon output goes to a log: otherwise the supervisor leaves stdout on whatever started the service (an ssh pipe)
+# and the first println! panics with 'Broken pipe' at every check-in once that reader is gone.
+output_log="/var/log/rustinion.log"
+error_log="/var/log/rustinion.log"
 
 depend() {
 	need net
