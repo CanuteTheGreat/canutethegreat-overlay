@@ -1,0 +1,18 @@
+name: binhost-notify
+# An ebuild/Manifest/files push wakes the gentoo-binhost watcher at once (it rebuilds just the lanes whose closure contains a changed
+# package). No polling delay for the owner's own packages; the watcher also polls every 15 min as the backstop.
+on:
+  push:
+    branches: [master]
+    paths: ['**/*.ebuild', '**/Manifest', '**/files/**']
+jobs:
+  notify:
+    runs-on: colo-light-x86_64
+    timeout-minutes: 5
+    steps:
+      - name: Dispatch binhost-watch
+        env: { T: '${{ secrets.BINHOST_DISPATCH_TOKEN }}' }
+        run: |
+          curl -fsS -m 30 -X POST -H "Authorization: token $T" -H 'Content-Type: application/json' \
+            "${{ github.server_url }}/api/v1/repos/CanuteTheGreat/gentoo-binhost/actions/workflows/binhost-watch.yml/dispatches" \
+            -d '{"ref":"main","inputs":{"reason":"overlay push ${{ github.sha }}"}}'
