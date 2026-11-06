@@ -7,7 +7,6 @@ supervisor="supervise-daemon"
 command="/usr/bin/pgbackrest"
 command_args="server ${PGBACKREST_ARGS}"
 command_user="${PGBACKREST_USER:-postgres}:${PGBACKREST_GROUP:-postgres}"
-required_files="${PGBACKREST_CONF:-/etc/pgbackrest.conf} /etc/pgbackrest/pgbackrest.conf"
 
 depend() {
 	need net
