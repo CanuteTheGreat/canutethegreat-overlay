@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 
 RDEPEND="
-	www-servers/apache[apache2_modules_alias,apache2_modules_autoindex,apache2_modules_dir,apache2_modules_mime,apache2_modules_authz_core,apache2_modules_log_config]
+	www-servers/apache[apache2_modules_alias,apache2_modules_autoindex,apache2_modules_dir,apache2_modules_mime,apache2_modules_authz_core,apache2_modules_log_config,apache2_modules_deflate,apache2_modules_filter]
 	net-fs/goofys
 "
 BDEPEND="dev-lang/python"
