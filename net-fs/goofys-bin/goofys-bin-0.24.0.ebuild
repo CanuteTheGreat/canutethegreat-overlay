@@ -16,6 +16,11 @@ QA_PREBUILT="*"
 
 S="${WORKDIR}"
 
+RDEPEND="
+	sys-fs/fuse:0
+	!net-fs/goofys
+"
+
 src_unpack() {
 	cp "${DISTDIR}/${P}-$(usex amd64 amd64 x86)" "${S}/${PN}" || die
 }
