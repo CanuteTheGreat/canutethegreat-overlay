@@ -89,3 +89,9 @@ use_latest_release = true
 source = "github"
 github = "flipperdevices/qFlipper"
 use_latest_release = true
+
+["gui-wm/cage"]
+source = "github"
+github = "cage-kiosk/cage"
+use_latest_release = true
+prefix = "v"
