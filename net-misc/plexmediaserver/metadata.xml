@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>CanuteTheGreat</name>
+	</maintainer>
+	<longdescription>Plex Media Server repackaged from the upstream .deb (as ::gentoo media-tv/plex-media-server) with an OpenRC supervise-daemon script that works in unprivileged LXD containers. RESTRICT=bindist: build/merge it on the host that runs it; never publish a binary package.</longdescription>
+	<use><flag name="verify-sig">Verify the .deb through Plex's signed apt Release/Packages chain</flag></use>
+</pkgmetadata>

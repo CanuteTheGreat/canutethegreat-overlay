@@ -1,0 +1,3 @@
+#!/bin/sh
+# supervise-daemon cannot run a command whose path contains spaces ("Plex Media Server"): exec it from here.
+exec "/usr/lib/plexmediaserver/Plex Media Server" "$@"
