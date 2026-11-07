@@ -1,0 +1,19 @@
+[Unit]
+Description=goofys mount of the Backblaze B2 bucket ctg-media at /mnt/ctg-media
+After=network-online.target
+Wants=network-online.target
+Before=jellyfin.service plex-media-server.service
+ConditionPathExists=/root/.aws/credentials
+
+[Service]
+Type=simple
+Environment=HOME=/root
+EnvironmentFile=-/etc/default/ctg-media-mount
+ExecStartPre=/usr/bin/mkdir -p /mnt/ctg-media
+ExecStart=/usr/bin/goofys -f --endpoint=https://s3.us-west-002.backblazeb2.com --profile=default -o allow_other --file-mode=0666 --dir-mode=0777 --uid=${CTG_UID} --gid=${CTG_GID} ctg-media /mnt/ctg-media
+ExecStop=/usr/bin/fusermount -u /mnt/ctg-media
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

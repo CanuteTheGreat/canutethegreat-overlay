@@ -1,0 +1,7 @@
+# conf.d for ctg-media-mount. uid/gid = the media server's account (jellyfin / plex): files in the bucket appear owned by it.
+#ctg_bucket="ctg-media"
+#ctg_mountpoint="/mnt/ctg-media"
+#ctg_profile="default"
+#ctg_endpoint="https://s3.us-west-002.backblazeb2.com"
+ctg_uid=0
+ctg_gid=0

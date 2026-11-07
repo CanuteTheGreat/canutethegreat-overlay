@@ -1,0 +1,30 @@
+#!/sbin/openrc-run
+# goofys mount of the Backblaze B2 bucket "ctg-media" at /mnt/ctg-media (Jellyfin/Plex library). Settings: /etc/conf.d/ctg-media-mount
+description="goofys mount of the B2 bucket ${ctg_bucket:-ctg-media} at ${ctg_mountpoint:-/mnt/ctg-media}"
+: ${ctg_bucket:=ctg-media}
+: ${ctg_mountpoint:=/mnt/ctg-media}
+: ${ctg_profile:=default}
+: ${ctg_endpoint:=https://s3.us-west-002.backblazeb2.com}
+: ${ctg_uid:=0}
+: ${ctg_gid:=0}
+supervisor=supervise-daemon
+command=/usr/bin/goofys
+command_args="-f --endpoint=${ctg_endpoint} --profile=${ctg_profile} -o allow_other --file-mode=0666 --dir-mode=0777 --uid=${ctg_uid} --gid=${ctg_gid} ${ctg_bucket} ${ctg_mountpoint}"
+respawn_delay=10
+respawn_max=0
+pidfile="/run/${RC_SVCNAME}.pid"
+export HOME=/root
+
+depend() {
+	need net
+	before jellyfin plex-media-server
+}
+
+start_pre() {
+	[ -e /root/.aws/credentials ] || { eerror "/root/.aws/credentials missing (B2 key, 0600, never packaged)"; return 1; }
+	mkdir -p "${ctg_mountpoint}"
+}
+
+stop_post() {
+	fusermount -u "${ctg_mountpoint}" 2>/dev/null || true
+}
