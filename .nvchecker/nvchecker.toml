@@ -95,3 +95,36 @@ source = "github"
 github = "cage-kiosk/cage"
 use_latest_release = true
 prefix = "v"
+
+["dev-db/pgbackrest"]
+source = "github"
+github = "pgbackrest/pgbackrest"
+use_latest_release = true
+prefix = "release/"
+
+["net-fs/minio-client"]
+source = "github"
+github = "minio/mc"
+use_latest_release = true
+from_pattern = 'RELEASE\.(\d+)-(\d+)-(\d+)T.*'
+to_pattern = '\1.\2.\3'
+
+["net-misc/ntfy-bin"]
+source = "github"
+github = "binwiederhier/ntfy"
+use_latest_release = true
+prefix = "v"
+
+["www-apps/wp-cli"]
+source = "github"
+github = "wp-cli/wp-cli"
+use_latest_release = true
+prefix = "v"
+
+["www-apps/forgejo"]
+source = "cmd"
+cmd = "curl -s --max-time 30 https://codeberg.org/api/v1/repos/forgejo/forgejo/releases/latest | python3 -c \"import sys,json;print(json.load(sys.stdin)['tag_name'].lstrip('v'))\""
+
+["net-misc/plexmediaserver"]
+source = "cmd"
+cmd = "curl -s --max-time 30 https://plex.tv/api/downloads/5.json | python3 -c \"import sys,json;print(json.load(sys.stdin)['computer']['Linux']['version'].split('-')[0])\""
