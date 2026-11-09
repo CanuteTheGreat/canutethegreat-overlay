@@ -1,0 +1,28 @@
+#!/sbin/openrc-run
+# Copyright 1999-2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Technitium DNS Server"
+supervisor="supervise-daemon"
+directory=/opt/technitium/dns
+command=/usr/bin/dotnet
+command_args="/opt/technitium/dns/DnsServerApp.dll ${TECHNITIUM_CONFDIR:-/etc/dns}"
+command_user="dns-server:dns-server"
+capabilities="^cap_net_bind_service"
+output_log=/var/log/technitium/dns/service.log
+error_log=/var/log/technitium/dns/service.err
+respawn_delay=10
+respawn_max=0
+export OPENSSL_ENABLE_SHA1_SIGNATURES=1
+export DOTNET_gcServer=0
+export DOTNET_BUNDLE_EXTRACT_BASE_DIR=/var/tmp/technitium-dotnet
+
+depend() {
+	need net
+	use logger
+	after firewall
+}
+
+start_pre() {
+	checkpath -d -m 0700 -o dns-server:dns-server "${TECHNITIUM_CONFDIR:-/etc/dns}" /var/log/technitium/dns
+}
