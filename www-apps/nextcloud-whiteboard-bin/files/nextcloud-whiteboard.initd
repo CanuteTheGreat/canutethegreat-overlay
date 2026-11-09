@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+# Nextcloud Whiteboard websocket server (Ubuntu unit: node websocket_server/main.js as www-data, env from /etc/nextcloud-whiteboard/env)
+description="Nextcloud Whiteboard WebSocket Server"
+supervisor=supervise-daemon
+command=/bin/sh
+command_args="-c 'set -a; . /etc/nextcloud-whiteboard/env; set +a; cd /usr/lib/nextcloud-whiteboard && exec /usr/bin/node websocket_server/main.js'"
+command_user="${NC_WB_USER:-www-data:www-data}"
+respawn_delay=5
+respawn_max=0
+output_logger="logger -t nextcloud-whiteboard -p daemon.info"
+error_logger="logger -t nextcloud-whiteboard -p daemon.err"
+depend() { need net; use logger; }
+start_pre() { [ -r /etc/nextcloud-whiteboard/env ] || { eerror "no /etc/nextcloud-whiteboard/env"; return 1; }; }
