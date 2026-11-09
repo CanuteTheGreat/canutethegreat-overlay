@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		Command line client for Proton VPN.
+	</longdescription>
+	<upstream><remote-id type="github">ProtonVPN/proton-vpn-cli</remote-id></upstream>
+</pkgmetadata>

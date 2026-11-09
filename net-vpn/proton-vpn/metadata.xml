@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		Meta package for the Proton VPN Linux client stack (what Debian ships as proton-vpn-gnome-desktop).
+	</longdescription>
+	<upstream><remote-id type="github">ProtonVPN/proton-vpn-gtk-app</remote-id></upstream>
+</pkgmetadata>

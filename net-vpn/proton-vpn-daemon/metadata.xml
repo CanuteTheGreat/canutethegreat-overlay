@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		Proton VPN split-tunneling daemon, a root D-Bus service used by the Proton VPN app and CLI.
+	</longdescription>
+	<upstream><remote-id type="github">ProtonVPN/proton-vpn-daemon</remote-id></upstream>
+</pkgmetadata>

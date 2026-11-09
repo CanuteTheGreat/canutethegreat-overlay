@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		Prebuilt Proton VPN API core 6.x (python modules, platform library, NetworkManager protun plugin service, permanent kill switch service), repackaged from Proton's own .deb because the Rust crates are not public.
+	</longdescription>
+	<upstream><remote-id type="github">ProtonVPN/python-proton-vpn-api-core</remote-id></upstream>
+</pkgmetadata>
