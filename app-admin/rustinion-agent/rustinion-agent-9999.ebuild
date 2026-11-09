@@ -24,7 +24,10 @@ QA_FLAGS_IGNORED="usr/bin/rustinion usr/libexec/rustinion/*"
 
 src_unpack() {
 	git-r3_src_unpack
+	# newer cargo.eclass runs `cargo fetch` in the current dir (WORKDIR), not S; Cargo.toml is in S
+	pushd "${S}" >/dev/null || die
 	cargo_live_src_unpack
+	popd >/dev/null || die
 }
 
 src_compile() {
