@@ -29,11 +29,9 @@ src_install() {
 	newinitd "${FILESDIR}"/nextcloud-whiteboard.initd nextcloud-whiteboard
 	newconfd "${FILESDIR}"/nextcloud-whiteboard.confd nextcloud-whiteboard
 	keepdir /etc/nextcloud-whiteboard
-	fowners root:www-data /etc/nextcloud-whiteboard
-	fperms 0750 /etc/nextcloud-whiteboard
 }
 
 pkg_postinst() {
-	elog "Secrets are never packaged: write /etc/nextcloud-whiteboard/env (root:www-data 0640) with JWT_SECRET_KEY, NEXTCLOUD_URL, PORT"
+	elog "Secrets are never packaged: chown root:www-data + chmod 0750 /etc/nextcloud-whiteboard, write /etc/nextcloud-whiteboard/env (root:www-data 0640) with JWT_SECRET_KEY, NEXTCLOUD_URL, PORT"
 	elog "then: rc-update add nextcloud-whiteboard default && rc-service nextcloud-whiteboard start"
 }
