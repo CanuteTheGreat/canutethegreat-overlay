@@ -53,11 +53,12 @@ src_install() {
 	# the egg-info carries the entry points (proton_loader_killswitch: default/wireguard/firewall) the app loads at runtime
 	local meta=usr/lib/python3/dist-packages/proton_vpn_api_core-${PV}.egg-info
 	install_module() {
-		insinto "$(python_get_sitedir)"
-		doins -r "${src}" "${meta}"
+		python_moduleinto .
+		python_domodule "${src}" "${meta}"
 		# the abi3 library is loaded as a module: keep it executable
-		fperms 0755 "$(python_get_sitedir)/proton/vpn/platform.abi3.so"
-		python_optimize "${ED}$(python_get_sitedir)/proton"
+		# (python_get_sitedir already includes EPREFIX, so combine it with ${D}, not ${ED})
+		chmod 0755 "${D}$(python_get_sitedir)/proton/vpn/platform.abi3.so" || die
+		python_optimize "${D}$(python_get_sitedir)/proton"
 	}
 	python_foreach_impl install_module
 
