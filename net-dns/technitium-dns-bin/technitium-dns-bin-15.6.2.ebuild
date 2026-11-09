@@ -3,6 +3,8 @@
 
 EAPI=8
 
+inherit systemd
+
 DESCRIPTION="Technitium DNS Server (authoritative + recursive, clustering, DHCP; upstream portable build)"
 HOMEPAGE="https://technitium.com/dns/ https://github.com/TechnitiumSoftware/DnsServer"
 SRC_URI="https://download.technitium.com/dns/archive/${PV}/DnsServerPortable.tar.gz -> DnsServerPortable-${PV}.tar.gz"
@@ -28,6 +30,7 @@ src_install() {
 	fperms 0755 /opt/technitium/dns/start.sh
 
 	newinitd "${FILESDIR}/technitium-dns.initd" technitium-dns
+	systemd_newunit "${FILESDIR}/technitium-dns.service" technitium-dns.service
 	newconfd "${FILESDIR}/technitium-dns.confd" technitium-dns
 
 	# config + zones + stats live in /etc/dns (same path as the Debian install, so data copies verbatim)
