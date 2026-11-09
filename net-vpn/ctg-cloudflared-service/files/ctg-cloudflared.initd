@@ -1,0 +1,22 @@
+#!/sbin/openrc-run
+# cloudflared connector of a remotely-managed tunnel (config lives in Cloudflare; token in /etc/conf.d/ctg-cloudflared)
+description="Cloudflare tunnel connector"
+command=/usr/bin/cloudflared
+command_args="--no-autoupdate tunnel run"
+command_background=false
+supervisor=supervise-daemon
+respawn_delay=5
+respawn_max=0
+output_log=/var/log/ctg-cloudflared.log
+error_log=/var/log/ctg-cloudflared.log
+
+depend() {
+	need net
+	after dns
+}
+
+start_pre() {
+	[ -n "${TUNNEL_TOKEN}" ] || { eerror "TUNNEL_TOKEN is empty in /etc/conf.d/ctg-cloudflared"; return 1; }
+	export TUNNEL_TOKEN
+	checkpath -f -m 0640 -o root:root /var/log/ctg-cloudflared.log
+}
