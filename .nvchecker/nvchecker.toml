@@ -128,3 +128,54 @@ cmd = "curl -s --max-time 30 https://codeberg.org/api/v1/repos/forgejo/forgejo/r
 ["net-misc/plexmediaserver"]
 source = "cmd"
 cmd = "curl -s --max-time 30 https://plex.tv/api/downloads/5.json | python3 -c \"import sys,json;print(json.load(sys.stdin)['computer']['Linux']['version'].split('-')[0])\""
+
+["net-vpn/cloudflared"]
+source = "github"
+github = "cloudflare/cloudflared"
+use_latest_release = true
+
+["net-dns/technitium-dns-bin"]
+source = "github"
+github = "TechnitiumSoftware/DnsServer"
+use_latest_release = true
+prefix = "v"
+
+["www-apps/nextcloud-whiteboard-bin"]
+source = "github"
+github = "nextcloud/whiteboard"
+use_latest_release = true
+prefix = "v"
+
+["net-vpn/proton-vpn-cli"]
+source = "github"
+github = "ProtonVPN/proton-vpn-cli"
+use_max_tag = true
+prefix = "v"
+
+["net-vpn/proton-vpn-daemon"]
+source = "github"
+github = "ProtonVPN/proton-vpn-daemon"
+use_max_tag = true
+prefix = "v"
+
+["net-vpn/proton-vpn-gtk-app"]
+source = "github"
+github = "ProtonVPN/proton-vpn-gtk-app"
+use_max_tag = true
+prefix = "v"
+
+["dev-python/proton-core"]
+source = "github"
+github = "ProtonVPN/python-proton-core"
+use_max_tag = true
+prefix = "v"
+
+["dev-python/proton-keyring-linux"]
+source = "github"
+github = "ProtonVPN/python-proton-keyring-linux"
+use_max_tag = true
+prefix = "v"
+
+["dev-python/sentry-sdk"]
+source = "pypi"
+pypi = "sentry-sdk"
