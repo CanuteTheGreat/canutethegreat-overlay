@@ -25,7 +25,9 @@ src_unpack() { unpack_deb "${DISTDIR}/${P}.deb"; }
 src_install() {
 	insinto /usr/lib/nextcloud-whiteboard
 	doins -r usr/lib/nextcloud-whiteboard/.
-	dodoc usr/share/doc/nextcloud-whiteboard/LICENSE.AGPL
+	# the .deb ships it gzipped
+	gzip -dc usr/share/doc/nextcloud-whiteboard/LICENSE.AGPL.gz > "${T}"/LICENSE.AGPL || die
+	dodoc "${T}"/LICENSE.AGPL
 	newinitd "${FILESDIR}"/nextcloud-whiteboard.initd nextcloud-whiteboard
 	newconfd "${FILESDIR}"/nextcloud-whiteboard.confd nextcloud-whiteboard
 	keepdir /etc/nextcloud-whiteboard
