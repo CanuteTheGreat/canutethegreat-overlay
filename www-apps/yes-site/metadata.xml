@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
-<pkgmetadata>
-	<maintainer type="person"><email>canutethegreat@gmail.com</email><name>Ronald Farrer</name></maintainer>
-	<longdescription>Server-rendered embed catalog with scheduled importer (yesnow.cam). Same layout as the yes-site .deb.</longdescription>
-</pkgmetadata>

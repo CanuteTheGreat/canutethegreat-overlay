@@ -1,3 +1,0 @@
-# /etc/conf.d/rustinion
-# Daemon flags live in /etc/rustinion/daemon.env (RUSTINION_DAEMON_ARGS="..."), exactly like the systemd unit.
-# RUST_LOG=info

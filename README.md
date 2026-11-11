@@ -23,7 +23,6 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `app-forensics/libewf` | 20260924 | libewf-experimental |
 | `games-util/geforcenow-electron` | 3.1.0 | |
 | `net-misc/freedownloadmanager` | 6.35.2.7075 | upstream only publishes an unversioned "latest" .deb: the Manifest breaks when FDM updates |
-| `games-util/steam-overlay-config` | 1 | opt-in, **HOGSMEADE only**: registers `::steam-overlay` in repos.conf + `package.use` (abi_x86_32 for Steam/NVIDIA deps), keywords, Valve licence; then `games-util/steam-launcher` comes from steam-overlay. Not in any Horcrux image |
 | `media-video/davinci-resolve`, `media-video/davinci-resolve-studio` | 21.2.0 | **fetch-restricted**, you download the archive by hand (see below); free / Studio edition, block each other; eclass `davinci-resolve` |
 | `net-fs/goofys-bin` | 0.24.0 | upstream binary (no source package any more) |
 | `net-proxy/zaproxy` | 2.17.0 | |
@@ -73,12 +72,8 @@ Tested without the real archive: the install logic was exercised against a *mock
 the first run against Blackmagic's real archive may still need a path fix. nvchecker follows `.ci/resolve-latest.py`
 (Blackmagic's public downloads index).
 
-## Steam (HOGSMEADE only)
-`games-util/steam-overlay-config` registers the third-party `steam-overlay` (`games-util/steam-launcher`), writes
-`/etc/portage/package.use/steam` (`abi_x86_32` for the ~60 libraries the 32-bit client and `x11-drivers/nvidia-drivers` need),
-`package.accept_keywords/steam` and `package.license/steam` (ValveSteamLicense). Then `emaint sync -r steam-overlay` and
-`emerge -av games-util/steam-launcher`. Needs a multilib profile (`default/linux/amd64/23.0`, what Horcrux images use). Install it
-only on machines that run Steam; it is not part of any Horcrux image, profile or `horcrux-repo-config`.
+## Owner-specific packages
+Host glue and the owner's own products (ctg-ops, ctg-timerd, ctg-backup, yes-site, rustinion-agent, the Steam config for one workstation, ...) live in a separate private overlay, not here.
 
 ## CI
 
