@@ -121,19 +121,36 @@ ctg-ops_src_install() {
 	fi
 
 	if use azkaban-host; then
-		for s in tmpool-ensure tmpool-health zpool-capacity-check; do
-			_ctgops_fix 0755 "${_CTGOPS_F}/azkaban/${s}" "/usr/libexec/ctg-azkaban/${s}"
-		done
-		for u in hw-watchdog tmpool-ensure tmpool-health zfs-load-key-tmpool zpool-capacity-check; do
-			_ctgops_unit "${_CTGOPS_F}/azkaban" "${u}"
-		done
-		# ONE rules file for both inits: systemd starts the unit, OpenRC starts the init script
-		cat > "${T}/99-tmpool.rules" <<-EOF || die
-		# Re-run tmpool-ensure when the Time Machine NVMe (re)appears (USB reconnect)
-		ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*[!0-9]", ENV{ID_SERIAL_SHORT}=="AME6N008111706O5D", TEST=="/run/systemd/system", RUN+="/usr/bin/systemctl --no-block start tmpool-ensure.service"
-		ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*[!0-9]", ENV{ID_SERIAL_SHORT}=="AME6N008111706O5D", TEST!="/run/systemd/system", RUN+="/bin/sh -c 'rc-service tmpool-ensure restart >/dev/null 2>&1 &'"
-		EOF
-		udev_dorules "${T}/99-tmpool.rules"
+		if [[ -e ${_CTGOPS_F}/azkaban/bulk-ensure ]]; then
+			# ctg-ops >= 1.0.35: Time Machine + cloud-copy live on the bulk pool (tmpool-* units renamed bulk-*)
+			for s in bulk-ensure bulk-recover bulk-health zpool-capacity-check; do
+				_ctgops_fix 0755 "${_CTGOPS_F}/azkaban/${s}" "/usr/libexec/ctg-azkaban/${s}"
+			done
+			for u in hw-watchdog bulk-ensure bulk-recover bulk-health zfs-load-key-bulk zpool-capacity-check; do
+				_ctgops_unit "${_CTGOPS_F}/azkaban" "${u}"
+			done
+			# same rules file the .deb ships (systemd starts the units; OpenRC gets the init scripts)
+			cat > "${T}/99-bulk.rules" <<-EOF || die
+			# Re-run bulk-ensure when the bulk Seagate (re)appears (USB reconnect), then clear the pool if the disconnect left it SUSPENDED
+			ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*[!0-9]", ENV{ID_SERIAL_SHORT}=="NA9W4KXB", TEST=="/run/systemd/system", RUN+="/usr/bin/systemctl --no-block start bulk-ensure.service bulk-recover.service"
+			ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*[!0-9]", ENV{ID_SERIAL_SHORT}=="NA9W4KXB", TEST!="/run/systemd/system", RUN+="/bin/sh -c 'rc-service bulk-ensure restart >/dev/null 2>&1 &'"
+			EOF
+			udev_dorules "${T}/99-bulk.rules"
+		else
+			for s in tmpool-ensure tmpool-health zpool-capacity-check; do
+				_ctgops_fix 0755 "${_CTGOPS_F}/azkaban/${s}" "/usr/libexec/ctg-azkaban/${s}"
+			done
+			for u in hw-watchdog tmpool-ensure tmpool-health zfs-load-key-tmpool zpool-capacity-check; do
+				_ctgops_unit "${_CTGOPS_F}/azkaban" "${u}"
+			done
+			# ONE rules file for both inits: systemd starts the unit, OpenRC starts the init script
+			cat > "${T}/99-tmpool.rules" <<-EOF || die
+			# Re-run tmpool-ensure when the Time Machine NVMe (re)appears (USB reconnect)
+			ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*[!0-9]", ENV{ID_SERIAL_SHORT}=="AME6N008111706O5D", TEST=="/run/systemd/system", RUN+="/usr/bin/systemctl --no-block start tmpool-ensure.service"
+			ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*[!0-9]", ENV{ID_SERIAL_SHORT}=="AME6N008111706O5D", TEST!="/run/systemd/system", RUN+="/bin/sh -c 'rc-service tmpool-ensure restart >/dev/null 2>&1 &'"
+			EOF
+			udev_dorules "${T}/99-tmpool.rules"
+		fi
 		insinto /etc/sysctl.d
 		doins "${_CTGOPS_F}/azkaban/99-azkaban-zram.conf"
 		insinto /etc/systemd/system.conf.d
