@@ -62,6 +62,39 @@ ctg-ops_src_install() {
 		_ctgops_fix 0755 "${_CTGOPS_F}/alert-mail/ctg-alert-mail" /usr/bin/ctg-alert-mail
 	fi
 
+	if use private-overlay; then
+		# Registers the private ::ctg-private overlay (CanuteTheGreat/ctg-private-overlay on Forgejo) on this host:
+		# read-only sync over ssh with a per-host deploy key generated in pkg_postinst (root-only, never packaged).
+		insinto /etc/portage/repos.conf
+		newins - ctg-private.conf <<-EOF || die
+		[ctg-private]
+		location = /var/db/repos/ctg-private
+		sync-type = git
+		sync-uri = ssh://ctg-private-git/CanuteTheGreat/ctg-private-overlay.git
+		sync-user = root
+		sync-depth = 1
+		auto-sync = yes
+		priority = 50
+		EOF
+		insinto /etc/ssh/ssh_config.d
+		newins - 40-ctg-private-git.conf <<-EOF || die
+		# ssh alias used only by the ::ctg-private repos.conf entry (shipped by app-admin/ctg-ops[private-overlay])
+		Host ctg-private-git
+		HostName git.canutethegreat.com
+		User git
+		IdentityFile /etc/ctg-private/deploy_key
+		IdentitiesOnly yes
+		UserKnownHostsFile /etc/ctg-private/known_hosts
+		StrictHostKeyChecking yes
+		BatchMode yes
+		EOF
+		insinto /etc/ctg-private
+		newins - known_hosts <<-EOF || die
+		git.canutethegreat.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCcn6mvcxBy9+wqsU5kaMV4PbtaiqSqngNuyJ+IEcAM7Q9OEvyHNA5cUooZBM+NsoXDhJXhttYg90CSDMFwFoOln7wbnLn/eRajlblJQJXaKEuqq0hcUAQoKjDZrKl0IuIfj4+BXJ2BV3LeDOuh5mPmsABuwUrD/tQKL5n8DpZBqB5kf1ca/qRLpxi0vTgh96qf7mo5une21kSmw/1lPeZVRGcz3kykpElUw0wb3xbS7MqVb/yet4AXImEddYb9pWUB/HsDmZjWujQ+Z3SIS2Fe/3BAZYrhDuN0zdA03MG44ut7jqX76JNpCKQ4craD+5K3eOk1zeX8cTFgh2TtfTawnQ5vvYOTjbT+rwU0sdo8WI/i7u4bUzjitdkVlgDEx2PF8ztZWYBqKbePhHwMFomt5S2i6BktOOawH4p6OvHT4RujieQeGCSfjjzWA/d/BobL34ctr/XZROLBQNjE7tPyA62bZ85p24xWCxYUto+orCOf2imBFI75nO6Y2lpddZwsKRCOEs8iFIRoGgHSHSHg/ztXbRtZPFLbOQEbPvqL/vBwO2p/vq+p7XEzqxFIZoPIWdzLmCj2qyONSaPi4sgRSKznJU/JiXnqkGRV7AzBfKF1L7RwDSrx2i2G2ps0xc9gR+OWalvAJjKgqYa4wFcpioSy8aw5ctnL+hTMdUDiFQ==
+		EOF
+		fperms 0700 /etc/ctg-private
+	fi
+
 	if use offhost-watch; then
 		insinto /usr/lib/ctg-offhost
 		doins "${_CTGOPS_F}/crystalcave/offhost/ctg_offhost.py" "${OLL}/bin/ctg_escalate.py"
@@ -203,6 +236,16 @@ ctg-ops_src_install() {
 }
 
 ctg-ops_pkg_postinst() {
+	if use private-overlay; then
+		# per-host read-only Forgejo deploy key: generated once, never overwritten, never leaves the host
+		local k="${EROOT}/etc/ctg-private/deploy_key"
+		if [[ ! -s ${k} ]]; then
+			ssh-keygen -q -t ed25519 -N '' -C "ctg-private-sync@$(hostname)" -f "${k}" || ewarn "could not create ${k}"
+			chmod 0600 "${k}"
+		fi
+		elog "ctg-private sync key (register as a READ-ONLY deploy key of CanuteTheGreat/ctg-private-overlay):"
+		elog "  $(cat "${k}.pub" 2>/dev/null)"
+	fi
 	if use ollivanders-ops; then
 		# HMAC key of the tenant finding relay: generated once, never packaged, never overwritten
 		local k="${EROOT}/etc/ctg-alerts/tenant-relay.key"

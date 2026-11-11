@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~arm64"
 LICENSE="all-rights-reserved"
 RESTRICT="mirror"
 SLOT="0"
-IUSE="alert-mail offhost-watch ollivanders-ops deploy-watchers ollivanders-ssh azkaban-host
+IUSE="+private-overlay alert-mail offhost-watch ollivanders-ops deploy-watchers ollivanders-ssh azkaban-host
 	sudoers-crystalcave forgejo-host crystalcave-host pg-restore-drill wordpress-ops nextcloud-ops"
 REQUIRED_USE="
 	offhost-watch? ( alert-mail )
@@ -25,6 +25,7 @@ REQUIRED_USE="
 
 RDEPEND="
 	dev-lang/python
+	private-overlay? ( dev-vcs/git virtual/openssh )
 	app-admin/ctg-timerd
 	ollivanders-ops? ( acct-group/ctg-alerts dev-db/postgresql sys-process/cronie )
 	offhost-watch? ( virtual/openssh )
