@@ -29,7 +29,10 @@ RDEPEND="
 	x264? ( media-libs/x264:= )
 "
 DEPEND="${RDEPEND}"
-BDEPEND="virtual/pkgconfig"
+BDEPEND="
+	dev-lang/nasm
+	virtual/pkgconfig
+"
 
 src_configure() {
 	local myeconfargs=(
