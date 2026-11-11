@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		Metasploit Framework from Rapid7's official omnibus package (apt.metasploit.com),
+		bundling its own Ruby, PostgreSQL and gems under /opt/metasploit-framework.
+		Updates come only through new ebuild versions; msfupdate is a stub that says so.
+		Unofficial Gentoo packaging; not affiliated with Rapid7.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">rapid7/metasploit-framework</remote-id>
+	</upstream>
+</pkgmetadata>

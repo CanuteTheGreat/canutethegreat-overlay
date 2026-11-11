@@ -1,0 +1,7 @@
+#!/bin/sh
+cat >&2 <<MSG
+msfupdate is disabled on Gentoo: Metasploit is installed by portage
+(net-analyzer/metasploit-bin) and must not update itself in /opt.
+Update with:  emerge --sync && emerge --ask --update net-analyzer/metasploit-bin
+MSG
+exit 1
