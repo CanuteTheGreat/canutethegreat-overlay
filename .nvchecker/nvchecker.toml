@@ -11,12 +11,6 @@ arch = "amd64"
 from_pattern = '^(\d+\.\d+\.\d+)~(\d+)~.*'
 to_pattern = '\1_p\2'
 
-["www-client/brave-bin"]
-source = "github"
-github = "brave/brave-browser"
-use_latest_release = true
-prefix = "v"
-
 ["app-misc/alienfx"]
 source = "github"
 github = "trackmastersteve/alienfx"

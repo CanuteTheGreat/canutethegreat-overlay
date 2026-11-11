@@ -11,14 +11,13 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 
     eselect repository add canutethegreat-overlay git https://github.com/CanuteTheGreat/canutethegreat-overlay.git
     emaint sync -r canutethegreat-overlay
-    echo 'www-client/brave-bin ~amd64' >> /etc/portage/package.accept_keywords/brave
-    emerge -av www-client/brave-bin
+    echo 'app-admin/proton-pass-bin ~amd64' >> /etc/portage/package.accept_keywords/proton
+    emerge -av app-admin/proton-pass-bin
 
 ## Packages
 
 | Package | Version | Notes |
 |---|---|---|
-| `www-client/brave-bin` | 1.99.55 | upstream .deb, amd64/arm64; sandbox needs USER_NS/PID_NS/NET_NS/SECCOMP in the kernel |
 | `app-misc/alienfx` | 2.4.3, 9999 | Alienware lighting; 9999 (git master, python >= 3.14) carries the `187c:0551` rule. The udev rules use `TAG+="uaccess"` (logged-in seat user, needs systemd-logind/elogind) instead of upstream's world-writable `MODE 666`; the sysfs `chmod 666` rule for the Alpha ASM100 is dropped |
 | `app-forensics/libewf` | 20260924 | libewf-experimental |
 | `games-util/geforcenow-electron` | 3.1.0 | |
@@ -44,8 +43,7 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `net-vpn/proton-vpn`, `proton-vpn-cli`, `proton-vpn-daemon`, `proton-vpn-gtk-app` (+ `dev-python/proton-*`) | see tree | Proton VPN client stack; newer than GURU |
 
 Removed (replaced by ::gentoo/GURU or another package, or no longer maintained here): `sys-kernel/dkms` (::gentoo),
-`app-containers/waydroid` (GURU carries 1.6.3: `eselect repository enable guru`), `www-client/brave-browser`
-(use `brave-bin`), `net-fs/goofys` (use `goofys-bin`), `net-misc/nxplayer`, `net-misc/nomachine`, `app-office/overgrive`,
+`app-containers/waydroid` (GURU carries 1.6.3: `eselect repository enable guru`), `net-fs/goofys` (use `goofys-bin`), `net-misc/nxplayer`, `net-misc/nomachine`, `app-office/overgrive`,
 `net-ftp/filezillapro`, `app-office/insync`, `app-mobilephone/easytether`.
 
 ## DaVinci Resolve (`media-video/davinci-resolve`, `media-video/davinci-resolve-studio`)

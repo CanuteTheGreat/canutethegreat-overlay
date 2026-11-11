@@ -3,7 +3,7 @@
 <repositories version="1.0">
 	<repo quality="experimental" status="unofficial">
 		<name>canutethegreat-overlay</name>
-		<description lang="en">Ebuilds for software that is not in ::gentoo or GURU: brave-bin, Proton apps, Caido, Metasploit, DaVinci Resolve (fetch-restricted), alienfx, geforcenow-electron, zaproxy, libewf, goofys-bin and more.</description>
+		<description lang="en">Ebuilds for software that is not in ::gentoo or GURU: Proton apps, Caido, Metasploit, DaVinci Resolve (fetch-restricted), alienfx, geforcenow-electron, zaproxy, libewf, goofys-bin and more.</description>
 		<homepage>https://github.com/CanuteTheGreat/canutethegreat-overlay</homepage>
 		<owner type="person">
 			<email>canutethegreat@gmail.com</email>
