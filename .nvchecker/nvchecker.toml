@@ -29,9 +29,9 @@ github = "hmlendea/gfn-electron"
 use_latest_release = true
 prefix = "v"
 
-["net-fs/goofys-bin"]
+["net-fs/geesefs"]
 source = "github"
-github = "kahing/goofys"
+github = "yandex-cloud/geesefs"
 use_latest_release = true
 prefix = "v"
 

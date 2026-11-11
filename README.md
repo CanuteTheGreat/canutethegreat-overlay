@@ -23,7 +23,7 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `games-util/geforcenow-electron` | 3.1.0 | |
 | `net-misc/freedownloadmanager` | 6.35.2.7075 | upstream only publishes an unversioned "latest" .deb: the Manifest breaks when FDM updates |
 | `media-video/davinci-resolve`, `media-video/davinci-resolve-studio` | 21.2.0 | **fetch-restricted**, you download the archive by hand (see below); free / Studio edition, block each other; eclass `davinci-resolve` |
-| `net-fs/goofys-bin` | 0.24.0 | upstream binary (no source package any more) |
+| `net-fs/geesefs` | 0.43.9 | GeeseFS (maintained goofys fork) FUSE mount for S3/B2, built from source with vendored deps (amd64, arm64) |
 | `net-proxy/zaproxy` | 2.17.0 | |
 | `app-admin/proton-pass-bin` | 1.43.0 | Proton Pass desktop (Electron), upstream .deb, amd64 only; wrapper reads `~/.config/proton-pass-flags.conf` |
 | `app-admin/proton-pass-cli-bin` | 2.7.0 | Proton Pass CLI, official prebuilt binary (amd64/arm64) |
