@@ -18,21 +18,31 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 
 | Package | Version | Notes |
 |---|---|---|
-| `www-client/brave-bin` | 1.98.62-r1 | upstream .deb, amd64/arm64; sandbox needs USER_NS/PID_NS/NET_NS/SECCOMP in the kernel |
+| `www-client/brave-bin` | 1.99.55 | upstream .deb, amd64/arm64; sandbox needs USER_NS/PID_NS/NET_NS/SECCOMP in the kernel |
 | `app-misc/alienfx` | 2.4.3, 9999 | Alienware lighting; 9999 (git master, python >= 3.14) carries the `187c:0551` rule. The udev rules use `TAG+="uaccess"` (logged-in seat user, needs systemd-logind/elogind) instead of upstream's world-writable `MODE 666`; the sysfs `chmod 666` rule for the Alpha ASM100 is dropped |
 | `app-forensics/libewf` | 20260924 | libewf-experimental |
-| `games-util/geforcenow-electron` | 3.0.6 | |
+| `games-util/geforcenow-electron` | 3.1.0 | |
 | `net-misc/freedownloadmanager` | 6.35.2.7075 | upstream only publishes an unversioned "latest" .deb: the Manifest breaks when FDM updates |
 | `games-util/steam-overlay-config` | 1 | opt-in, **HOGSMEADE only**: registers `::steam-overlay` in repos.conf + `package.use` (abi_x86_32 for Steam/NVIDIA deps), keywords, Valve licence; then `games-util/steam-launcher` comes from steam-overlay. Not in any Horcrux image |
 | `media-video/davinci-resolve`, `media-video/davinci-resolve-studio` | 21.2.0 | **fetch-restricted**, you download the archive by hand (see below); free / Studio edition, block each other; eclass `davinci-resolve` |
 | `net-fs/goofys-bin` | 0.24.0 | upstream binary (no source package any more) |
 | `net-proxy/zaproxy` | 2.17.0 | |
 | `app-admin/proton-pass-bin` | 1.43.0 | Proton Pass desktop (Electron), upstream .deb, amd64 only; wrapper reads `~/.config/proton-pass-flags.conf` |
-| `app-admin/proton-pass-cli-bin` | 2.6.0 | Proton Pass CLI, official prebuilt binary (amd64/arm64) |
+| `app-admin/proton-pass-cli-bin` | 2.7.0 | Proton Pass CLI, official prebuilt binary (amd64/arm64) |
 | `net-im/proton-meet-bin` | 1.0.14 | Proton Meet desktop (Electron), upstream .deb, amd64 only |
 | `sys-auth/proton-authenticator-bin` | 1.1.6 | Proton Authenticator (Tauri), upstream .deb, amd64 only |
 | `net-fs/proton-drive-cli-bin` | 0.9.0 | Proton Drive CLI, official prebuilt binary (amd64/arm64) |
 | `mail-client/proton-mail-export-bin` | 1.0.7 | Proton Mail Export Tool CLI (amd64) |
+| `net-analyzer/caido-bin`, `net-analyzer/caido-cli-bin` | 0.59.0 | Caido web-security proxy, upstream binaries |
+| `net-analyzer/metasploit-bin` | 6.5.10_p20261106055829 | Rapid7 omnibus build under `/opt/metasploit-framework`, self-updater disabled |
+| `app-misc/qflipper` | 1.3.3 | Flipper Zero desktop app (source build) |
+| `dev-embedded/pineflash` | 0.5.5 | Pine64 flasher |
+| `dev-db/pgbackrest` | 2.60.0-r1 | |
+| `net-misc/ntfy-bin` | 2.37.2 | ntfy server/client, upstream binary |
+| `net-fs/minio-client` | 2025.08.13 | `mc`, vendored Go modules |
+| `www-apps/wp-cli` | 2.12.0 | |
+| `net-misc/xrdp`, `net-misc/xorgxrdp` | 0.10.6.1-r1, 0.10.5-r2 | newer than ::gentoo |
+| `net-vpn/proton-vpn`, `proton-vpn-cli`, `proton-vpn-daemon`, `proton-vpn-gtk-app` (+ `dev-python/proton-*`) | see tree | Proton VPN client stack; newer than GURU |
 
 Removed (replaced by ::gentoo/GURU or another package, or no longer maintained here): `sys-kernel/dkms` (::gentoo),
 `app-containers/waydroid` (GURU carries 1.6.3: `eselect repository enable guru`), `www-client/brave-browser`
