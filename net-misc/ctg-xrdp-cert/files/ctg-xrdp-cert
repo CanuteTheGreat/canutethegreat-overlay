@@ -1,0 +1,36 @@
+#!/bin/sh
+# Issue/renew the xrdp TLS leaf cert from a private home CA (kept root-only in /etc/xrdp/ca).
+# Idempotent: re-issues when the leaf is missing, expires in < 30 days, or SANs changed.
+set -eu
+D=/etc/xrdp
+CA=$D/ca
+HOSTFQDN=threebroomsticks.home.canutethegreat.com
+SAN="DNS:$HOSTFQDN,DNS:threebroomsticks,IP:10.66.69.7,IP:10.69.69.12"
+umask 077
+mkdir -p "$CA"
+if [ ! -f "$CA/ca.key" ]; then
+	openssl genrsa -out "$CA/ca.key" 4096 2>/dev/null
+	openssl req -x509 -new -key "$CA/ca.key" -sha256 -days 3650 \
+		-subj "/O=CanuteTheGreat Home/CN=CanuteTheGreat Home RDP CA" \
+		-addext "basicConstraints=critical,CA:TRUE,pathlen:0" \
+		-addext "keyUsage=critical,keyCertSign,cRLSign" \
+		-out "$CA/ca.crt"
+fi
+need=1
+if [ -f "$D/cert.pem" ] && openssl x509 -checkend $((30*86400)) -noout -in "$D/cert.pem" >/dev/null 2>&1 \
+	&& openssl x509 -in "$D/cert.pem" -noout -ext subjectAltName 2>/dev/null | grep -q "10.69.69.12" \
+	&& openssl verify -CAfile "$CA/ca.crt" "$D/cert.pem" >/dev/null 2>&1; then
+	need=0
+fi
+[ "$need" = 0 ] && exit 0
+T=$(mktemp -d)
+openssl genrsa -out "$T/key.pem" 3072 2>/dev/null
+openssl req -new -key "$T/key.pem" -subj "/O=CanuteTheGreat Home/CN=$HOSTFQDN" -out "$T/csr"
+printf 'basicConstraints=CA:FALSE\nkeyUsage=critical,digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth\nsubjectAltName=%s\n' "$SAN" > "$T/ext"
+openssl x509 -req -in "$T/csr" -CA "$CA/ca.crt" -CAkey "$CA/ca.key" -CAcreateserial -days 397 -sha256 -extfile "$T/ext" -out "$T/cert.pem" 2>/dev/null
+cat "$CA/ca.crt" >> "$T/cert.pem"   # chain: leaf then CA
+install -m 0644 "$T/cert.pem" "$D/cert.pem"
+install -m 0600 "$T/key.pem" "$D/key.pem"
+rm -rf "$T"
+echo "issued new xrdp cert (valid 397 days)"
+/etc/init.d/xrdp status >/dev/null 2>&1 && /etc/init.d/xrdp restart >/dev/null 2>&1 || true

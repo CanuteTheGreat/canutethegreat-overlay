@@ -1,0 +1,12 @@
+#!/sbin/openrc-run
+description="zram swap (only swap allowed in azkaban guests; never disk-backed)"
+depend() { before localmount; }
+start() {
+  ebegin "zram swap 1G zstd"
+  modprobe zram && dev=$(zramctl --find --size 1G --algorithm zstd) && mkswap "$dev" >/dev/null && swapon -p 100 "$dev"
+  eend $?
+}
+stop() {
+  for d in $(swapon --noheadings --show=NAME | grep zram); do swapoff "$d"; zramctl --reset "$d"; done
+  return 0
+}
