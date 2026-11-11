@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
-<pkgmetadata>
-	<maintainer type="person">
-		<email>canutethegreat@gmail.com</email>
-		<name>Ronald Farrer</name>
-	</maintainer>
-	<longdescription lang="en">Issues and renews the xrdp TLS leaf certificate from a private home CA kept root-only in /etc/xrdp/ca; daily cron job.</longdescription>
-</pkgmetadata>
