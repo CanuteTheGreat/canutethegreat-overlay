@@ -88,6 +88,15 @@ ctg-ops_src_install() {
 		StrictHostKeyChecking yes
 		BatchMode yes
 		EOF
+		# the repo's own packages are ~arch + all-rights-reserved (owner packages)
+		insinto /etc/portage/package.accept_keywords
+		newins - ctg-private <<-EOF || die
+		*/*::ctg-private ~amd64 ~arm64
+		EOF
+		insinto /etc/portage/package.license
+		newins - ctg-private <<-EOF || die
+		*/*::ctg-private all-rights-reserved
+		EOF
 		insinto /etc/ctg-private
 		newins - known_hosts <<-EOF || die
 		git.canutethegreat.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCcn6mvcxBy9+wqsU5kaMV4PbtaiqSqngNuyJ+IEcAM7Q9OEvyHNA5cUooZBM+NsoXDhJXhttYg90CSDMFwFoOln7wbnLn/eRajlblJQJXaKEuqq0hcUAQoKjDZrKl0IuIfj4+BXJ2BV3LeDOuh5mPmsABuwUrD/tQKL5n8DpZBqB5kf1ca/qRLpxi0vTgh96qf7mo5une21kSmw/1lPeZVRGcz3kykpElUw0wb3xbS7MqVb/yet4AXImEddYb9pWUB/HsDmZjWujQ+Z3SIS2Fe/3BAZYrhDuN0zdA03MG44ut7jqX76JNpCKQ4craD+5K3eOk1zeX8cTFgh2TtfTawnQ5vvYOTjbT+rwU0sdo8WI/i7u4bUzjitdkVlgDEx2PF8ztZWYBqKbePhHwMFomt5S2i6BktOOawH4p6OvHT4RujieQeGCSfjjzWA/d/BobL34ctr/XZROLBQNjE7tPyA62bZ85p24xWCxYUto+orCOf2imBFI75nO6Y2lpddZwsKRCOEs8iFIRoGgHSHSHg/ztXbRtZPFLbOQEbPvqL/vBwO2p/vq+p7XEzqxFIZoPIWdzLmCj2qyONSaPi4sgRSKznJU/JiXnqkGRV7AzBfKF1L7RwDSrx2i2G2ps0xc9gR+OWalvAJjKgqYa4wFcpioSy8aw5ctnL+hTMdUDiFQ==
