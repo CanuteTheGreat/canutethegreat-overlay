@@ -28,5 +28,8 @@ EGIT_BRANCH="main"
 
 src_unpack() {
 	git-r3_src_unpack
+	# newer cargo.eclass runs `cargo fetch` in the current dir (WORKDIR), not S
+	pushd "${S}" >/dev/null || die
 	cargo_live_src_unpack
+	popd >/dev/null || die
 }
