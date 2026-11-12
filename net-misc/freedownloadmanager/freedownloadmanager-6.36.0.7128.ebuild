@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit unpacker xdg-utils
+inherit desktop unpacker xdg-utils
 
 DESCRIPTION="Powerful modern download accelerator and organizer for Windows and Mac"
 HOMEPAGE="https://www.freedownloadmanager.org/"
@@ -62,10 +62,10 @@ src_prepare() {
 	default
 
 	# Fix desktop file paths
+	# The vendor entry already carries StartupWMClass=fdm; only the Exec/Icon paths need to follow the system layout
 	sed -i \
-		-e 's|/opt/freedownloadmanager/fdm|fdm|g' \
-		-e 's|Icon=freedownloadmanager|Icon=freedownloadmanager|g' \
-		-e '/^Exec=/a\StartupWMClass=Free Download Manager' \
+		-e 's|^Exec=.*|Exec=fdm|' \
+		-e 's|^Icon=.*|Icon=freedownloadmanager|' \
 		usr/share/applications/freedownloadmanager.desktop || die "sed failed"
 }
 
