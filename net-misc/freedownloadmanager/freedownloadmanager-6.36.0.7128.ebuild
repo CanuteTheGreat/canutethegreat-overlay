@@ -7,7 +7,9 @@ inherit unpacker xdg-utils
 
 DESCRIPTION="Powerful modern download accelerator and organizer for Windows and Mac"
 HOMEPAGE="https://www.freedownloadmanager.org/"
-SRC_URI="https://files2.freedownloadmanager.org/6/latest/${PN}.deb -> ${P}.deb"
+# The vendor only serves a moving "latest" .deb (no versioned URL), so the pinned
+# release is mirrored to the Forgejo generic registry (anonymous download).
+SRC_URI="https://git.canutethegreat.com/api/packages/CanuteTheGreat/generic/${PN}/${PV}/${P}.deb"
 
 LICENSE="FDM"
 SLOT="0"
