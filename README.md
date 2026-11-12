@@ -43,7 +43,7 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `net-vpn/proton-vpn`, `proton-vpn-cli`, `proton-vpn-daemon`, `proton-vpn-gtk-app` (+ `dev-python/proton-*`) | see tree | Proton VPN client stack; newer than GURU |
 
 Removed (replaced by ::gentoo/GURU or another package, or no longer maintained here): `sys-kernel/dkms` (::gentoo),
-`app-containers/waydroid` (GURU carries 1.6.3: `eselect repository enable guru`), `net-fs/goofys` (use `goofys-bin`), `net-misc/nxplayer`, `net-misc/nomachine`, `app-office/overgrive`,
+`app-containers/waydroid` (GURU carries 1.6.3: `eselect repository enable guru`), `net-fs/goofys` and `net-fs/goofys-bin` (unmaintained; use `net-fs/geesefs`), `net-misc/nxplayer`, `net-misc/nomachine`, `app-office/overgrive`,
 `net-ftp/filezillapro`, `app-office/insync`, `app-mobilephone/easytether`.
 
 ## DaVinci Resolve (`media-video/davinci-resolve`, `media-video/davinci-resolve-studio`)
