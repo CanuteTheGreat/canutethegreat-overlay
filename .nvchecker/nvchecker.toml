@@ -184,3 +184,23 @@ prefix = "v"
 ["dev-python/sentry-sdk"]
 source = "pypi"
 pypi = "sentry-sdk"
+
+["net-misc/xrdp"]
+source = "github"
+github = "neutrinolabs/xrdp"
+use_latest_release = true
+prefix = "v"
+
+["net-misc/xorgxrdp"]
+source = "github"
+github = "neutrinolabs/xorgxrdp"
+use_latest_release = true
+prefix = "v"
+
+["dev-python/proton-vpn-api-core-bin"]
+source = "apt"
+mirror = "https://repo.protonvpn.com/debian/"
+suite = "stable"
+repo = "main"
+pkg = "python3-proton-vpn-api-core"
+arch = "amd64"
