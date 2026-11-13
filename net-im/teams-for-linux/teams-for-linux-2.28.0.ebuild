@@ -1,5 +1,5 @@
 # Copyright 1999-2026 Gentoo Authors
-# ::canutethegreat copy of ::guru teams-for-linux-2.27.0 with the Exec line fixed for native Wayland.
+# ::canutethegreat copy of ::guru teams-for-linux-2.28.0 with the Exec line fixed for native Wayland.
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -96,6 +96,8 @@ src_install() {
 
 	exeinto "${DESTDIR}"
 	doexe chrome-sandbox chrome_crashpad_handler "${PN}" ./*.so*
+	# setuid helper: without it Electron silently falls back to a weaker sandbox
+	fperms 4711 "${DESTDIR}/chrome-sandbox"
 
 	insinto "${DESTDIR}"
 	doins ./*.pak ./*.bin ./*.json ./*.dat

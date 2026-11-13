@@ -204,3 +204,15 @@ suite = "stable"
 repo = "main"
 pkg = "python3-proton-vpn-api-core"
 arch = "amd64"
+
+["net-im/teams-for-linux"]
+source = "github"
+github = "IsmaelMartinez/teams-for-linux"
+use_latest_release = true
+prefix = "v"
+
+["net-misc/onedrive"]
+source = "github"
+github = "abraunegg/onedrive"
+use_latest_release = true
+prefix = "v"
