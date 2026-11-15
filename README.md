@@ -25,18 +25,18 @@ packages carry `RESTRICT="bindist mirror"` and an honest `LICENSE`. Everything i
 | `media-video/davinci-resolve`, `media-video/davinci-resolve-studio` | 21.2.0 | **fetch-restricted**, you download the archive by hand (see below); free / Studio edition, block each other; eclass `davinci-resolve` |
 | `net-fs/geesefs` | 0.43.9 | GeeseFS (maintained goofys fork) FUSE mount for S3/B2, built from source with vendored deps (amd64, arm64) |
 | `net-proxy/zaproxy` | 2.17.0 | |
-| `app-admin/proton-pass-bin` | 1.43.0 | Proton Pass desktop (Electron), upstream .deb, amd64 only; wrapper reads `~/.config/proton-pass-flags.conf` |
+| `app-admin/proton-pass-bin` | 1.43.1 | Proton Pass desktop (Electron), upstream .deb, amd64 only; wrapper reads `~/.config/proton-pass-flags.conf` |
 | `app-admin/proton-pass-cli-bin` | 2.7.0 | Proton Pass CLI, official prebuilt binary (amd64/arm64) |
 | `net-im/proton-meet-bin` | 1.0.14 | Proton Meet desktop (Electron), upstream .deb, amd64 only |
 | `sys-auth/proton-authenticator-bin` | 1.1.6 | Proton Authenticator (Tauri), upstream .deb, amd64 only |
 | `net-fs/proton-drive-cli-bin` | 0.9.0 | Proton Drive CLI, official prebuilt binary (amd64/arm64) |
 | `mail-client/proton-mail-export-bin` | 1.0.7 | Proton Mail Export Tool CLI (amd64) |
-| `net-analyzer/caido-bin`, `net-analyzer/caido-cli-bin` | 0.59.0 | Caido web-security proxy, upstream binaries |
+| `net-analyzer/caido-bin`, `net-analyzer/caido-cli-bin` | 0.59.1 | Caido web-security proxy, upstream binaries |
 | `net-analyzer/metasploit-bin` | 6.5.10_p20261106055829 | Rapid7 omnibus build under `/opt/metasploit-framework`, self-updater disabled |
 | `app-misc/qflipper` | 1.3.3 | Flipper Zero desktop app (source build) |
 | `dev-embedded/pineflash` | 0.5.5 | Pine64 flasher |
 | `dev-db/pgbackrest` | 2.60.0-r1 | |
-| `net-misc/ntfy-bin` | 2.37.2 | ntfy server/client, upstream binary |
+| `net-misc/ntfy-bin` | 2.38.0 | ntfy server/client, upstream binary |
 | `net-fs/minio-client` | 2025.08.13 | `mc`, vendored Go modules |
 | `www-apps/wp-cli` | 2.12.0 | |
 | `net-misc/xrdp`, `net-misc/xorgxrdp` | 0.10.6.1-r1, 0.10.5-r2 | newer than ::gentoo |

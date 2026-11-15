@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~arm64"
 # "make test" fails since cloudflared-2024.12.1, and fails with network-sanbox
 RESTRICT="test"
 
-BDEPEND=">=dev-lang/go-1.27.3"
+BDEPEND=">=dev-lang/go-1.27.4"
 
 src_compile(){
 	local ldflags="
