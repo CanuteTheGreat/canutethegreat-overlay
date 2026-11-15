@@ -81,12 +81,14 @@ src_install() {
 		doicon -s "${size}" "usr/share/icons/hicolor/${size}x${size}/apps/${PN}.png"
 	done
 
-	# Upstream's .desktop forces XWayland (--ozone-platform=x11). Under GNOME fractional scaling an X11 Electron window is either tiny (native-scaling)
-	# or blurry (compositor-scaled); Electron 44 runs natively on Wayland with PipeWire screen capture, so use the ozone hint (X11 on an X11 session)
-	# and the PipeWire capturer + client-side decorations features.
-	sed -i 's|--ozone-platform=x11|--ozone-platform-hint=auto --enable-features=WebRTCPipeWireCapturer,WaylandWindowDecorations|' \
+	# Upstream's .desktop used to force XWayland (--ozone-platform=x11) and, since 2.31, passes no ozone flag at all.
+	# Under GNOME fractional scaling an X11 Electron window is either tiny (native-scaling) or blurry (compositor-scaled);
+	# Electron 44 runs natively on Wayland with PipeWire screen capture, so give the Exec line the ozone hint (X11 on an
+	# X11 session), the PipeWire capturer and client-side decorations features, whichever form upstream ships.
+	sed -i -e 's|--ozone-platform=x11|--ozone-platform-hint=auto --enable-features=WebRTCPipeWireCapturer,WaylandWindowDecorations|' \
+		-e '/^Exec=/{/--ozone-platform-hint=auto/!s|^\(Exec=[^ ]*\)|\1 --ozone-platform-hint=auto --enable-features=WebRTCPipeWireCapturer,WaylandWindowDecorations|}' \
 		"usr/share/applications/${PN}.desktop" || die
-	grep -q -- '--ozone-platform-hint=auto' "usr/share/applications/${PN}.desktop" || die "teams-for-linux .desktop Exec line changed upstream; revisit the Wayland sed"
+	grep -q -- '^Exec=.*--ozone-platform-hint=auto' "usr/share/applications/${PN}.desktop" || die "teams-for-linux .desktop Exec line changed upstream; revisit the Wayland sed"
 
 	domenu "usr/share/applications/${PN}.desktop"
 

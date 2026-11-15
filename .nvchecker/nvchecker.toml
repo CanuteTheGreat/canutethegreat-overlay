@@ -2,7 +2,7 @@
 
 ["net-analyzer/metasploit-bin"]
 source = "apt"
-mirror = "https://apt.metasploit.com/"
+mirror = "https://apt.metasploit.com"  # no trailing slash: nvchecker builds //dists/... which the CDN rejects with 403
 suite = "lucid"
 repo = "main"
 pkg = "metasploit-framework"
@@ -206,7 +206,8 @@ arch = "amd64"
 ["net-im/teams-for-linux"]
 source = "github"
 github = "IsmaelMartinez/teams-for-linux"
-use_latest_release = true
+# upstream marks every release since 2.29 as a GitHub "pre-release", which use_latest_release skips
+use_max_tag = true
 prefix = "v"
 
 ["net-misc/onedrive"]
