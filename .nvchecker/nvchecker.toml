@@ -77,6 +77,10 @@ prefix = "v"
 source = "cmd"
 cmd = "python3 .ci/resolve-latest.py"
 
+["media-video/davinci-resolve-studio"]
+source = "cmd"
+cmd = "python3 .ci/resolve-latest.py studio"
+
 ["net-analyzer/caido-bin"]
 source = "cmd"
 cmd = "curl -fsSL https://api.caido.io/releases/latest | python3 -c 'import json,sys; print(json.load(sys.stdin)[\"version\"])'"
@@ -142,12 +146,6 @@ use_latest_release = true
 ["net-dns/technitium-dns-bin"]
 source = "github"
 github = "TechnitiumSoftware/DnsServer"
-use_latest_release = true
-prefix = "v"
-
-["www-apps/nextcloud-whiteboard-bin"]
-source = "github"
-github = "nextcloud/whiteboard"
 use_latest_release = true
 prefix = "v"
 

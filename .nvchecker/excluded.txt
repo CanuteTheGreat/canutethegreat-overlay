@@ -1,0 +1,4 @@
+# Packages with an ebuild here that update-check does not version-track (fnmatch pattern # reason).
+acct-user/*   # account packages: no upstream
+acct-group/*  # account packages: no upstream
+net-vpn/proton-vpn  # metapackage (RDEPEND only); its members are tracked individually

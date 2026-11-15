@@ -1,0 +1,46 @@
+# Security-advisory sources (.ci/security-check.py). Packages whose nvchecker source is a GitHub
+# repo, PyPI, crates.io or npm are derived automatically; list the rest here.
+# github = "owner/repo" -> OSV (GIT) + GitHub advisories; none = "reason" -> no public advisory source.
+
+["net-analyzer/metasploit-bin"]
+github = "rapid7/metasploit-framework"
+
+["net-analyzer/caido-bin"]
+github = "caido/caido"
+
+["net-analyzer/caido-cli-bin"]
+github = "caido/caido"
+
+["www-apps/forgejo"]
+osv = [["Go", "codeberg.org/forgejo/forgejo"], ["Go", "forgejo.org"]]
+glsa = false
+
+["net-misc/plexmediaserver"]
+none = "closed-source vendor binary; Plex publishes no machine-readable advisories (only the GLSA feed is checked)"
+
+["net-misc/freedownloadmanager"]
+none = "closed-source vendor binary; no advisory feed"
+
+["app-admin/proton-pass-bin"]
+none = "vendor binary; Proton publishes no advisory feed"
+
+["net-im/proton-meet-bin"]
+none = "vendor binary; Proton publishes no advisory feed"
+
+["sys-auth/proton-authenticator-bin"]
+none = "vendor binary; Proton publishes no advisory feed"
+
+["app-admin/proton-pass-cli-bin"]
+none = "vendor binary; Proton publishes no advisory feed"
+
+["net-fs/proton-drive-cli-bin"]
+none = "vendor binary; Proton publishes no advisory feed"
+
+["media-video/davinci-resolve"]
+none = "closed-source vendor binary; no advisory feed"
+
+["media-video/davinci-resolve-studio"]
+none = "closed-source vendor binary; no advisory feed"
+
+["dev-python/proton-vpn-api-core-bin"]
+github = "ProtonVPN/python-proton-vpn-api-core"
