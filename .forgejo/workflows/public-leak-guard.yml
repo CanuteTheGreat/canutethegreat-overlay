@@ -1,0 +1,17 @@
+# Public repo: no owner-identifying hostnames/addresses/presence language in files or branch commit messages.
+# Owner-specific packages belong in the private overlay (ctg-private-overlay).
+name: public-leak-guard
+on:
+  push:
+  pull_request:
+jobs:
+  leaks:
+    runs-on: linux-any
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: python3 .ci/check-public-leaks.py
+      - if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref != 'refs/heads/master' && !startsWith(github.ref, 'refs/tags/'))
+        run: python3 .ci/check-public-leaks.py --commits "origin/${{ github.base_ref || 'master' }}..HEAD"

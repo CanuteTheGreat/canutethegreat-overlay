@@ -1,6 +1,6 @@
 #!/bin/sh
 # Run `pkgcheck scan -k error` for this overlay in a throw-away Gentoo stage3
-# container (run on an rw-man host; never on crystalcave/ollivanders).
+# container (run in a build container on a CI/build host, not on a workstation).
 set -eu
 cd "$(dirname "$0")/.."
 name="pkgcheck-$$-$(date +%s)"

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # Derived from ::gentoo media-tv/plex-media-server (same upstream .deb, same Manifest). Why a separate package: ::gentoo's init script runs
 # start-stop-daemon with `-N -5` (nice -5): inside an unprivileged LXD/LXC container setpriority fails EACCES and the server never starts
-# ("status: crashed", no logs; ollivanders plex cutover 2026-11-07). This one ships a supervise-daemon script without it. No compile.
+# ("status: crashed", no logs; seen after a server migration). This one ships a supervise-daemon script without it. No compile.
 
 EAPI=8
 
