@@ -22,6 +22,11 @@ SRC_URI="
 "
 S="${WORKDIR}"
 
+# Since 2.32 the rpm payload is an extended cpio ("07070X", rpm >= 4.20/6), which rpm2targz/GNU cpio cannot read
+# ("tar: This does not look like a tar archive"). rpm.eclass only uses rpm2archive when app-arch/rpm is a BDEPEND
+# installed, but its default || ( rpm2targz rpm ) is satisfied by rpm2targz alone, so require rpm explicitly.
+BDEPEND+=" >=app-arch/rpm-4.19.0[lzma(+)]"
+
 LICENSE="GPL-3"
 # Electron bundles a bunch of things
 LICENSE+="
