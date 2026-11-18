@@ -44,3 +44,6 @@ none = "closed-source vendor binary; no advisory feed"
 
 ["dev-python/proton-vpn-api-core-bin"]
 github = "ProtonVPN/python-proton-vpn-api-core"
+
+["app-misc/claude-desktop-bin"]
+none = "vendor binary; Anthropic publishes no machine-readable advisory feed for the desktop app (Chromium/Electron runtime is bumped in each release)"

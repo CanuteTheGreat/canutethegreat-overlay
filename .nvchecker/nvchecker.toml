@@ -215,3 +215,12 @@ source = "github"
 github = "abraunegg/onedrive"
 use_latest_release = true
 prefix = "v"
+
+# Claude desktop app (Linux beta): Anthropic's signed apt repository (key 31DD DE24 ... CACE)
+["app-misc/claude-desktop-bin"]
+source = "apt"
+mirror = "https://downloads.claude.ai/claude-desktop/apt/stable"  # no trailing slash
+suite = "stable"
+repo = "main"
+pkg = "claude-desktop"
+arch = "amd64"

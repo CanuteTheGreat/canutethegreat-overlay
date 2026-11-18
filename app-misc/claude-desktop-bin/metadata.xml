@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>Ronald Farrer</name>
+	</maintainer>
+	<longdescription lang="en">
+		Claude desktop app (Chat, Cowork, Claude Code; Linux beta), repackaged from Anthropic's
+		official .deb in its signed apt repository. Unofficial Gentoo packaging; not affiliated
+		with Anthropic. Updates arrive through Portage, not the app.
+	</longdescription>
+	<use>
+		<flag name="cowork">Pull in QEMU, UEFI firmware and virtiofsd, which Cowork needs to run its virtual machine (needs /dev/kvm and kvm group membership)</flag>
+	</use>
+</pkgmetadata>

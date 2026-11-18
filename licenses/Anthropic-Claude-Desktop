@@ -1,0 +1,13 @@
+Claude desktop app: Anthropic proprietary software
+
+Copyright 2026 Anthropic PBC. The Claude desktop app is proprietary software
+distributed by Anthropic in binary form only, for use under Anthropic's terms:
+
+  Consumer Terms: https://www.anthropic.com/legal/consumer-terms
+  Commercial Terms: https://www.anthropic.com/legal/commercial-terms
+  Usage Policy: https://www.anthropic.com/legal/aup
+
+Redistribution of the binary is not permitted by this packaging (RESTRICT=bindist).
+The bundled Electron/Chromium runtime and the bundled virtiofsd are licensed as
+listed in LICENSES.chromium.html and resources/virtiofsd.LICENSE-* inside the
+installed /opt/claude-desktop tree.
