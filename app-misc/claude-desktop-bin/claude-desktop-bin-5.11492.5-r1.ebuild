@@ -64,13 +64,13 @@ RDEPEND="
 	x11-misc/xdg-utils
 	|| (
 		sys-apps/xdg-desktop-portal-gtk
-		gnome-base/gnome-desktop-portal
+		sys-apps/xdg-desktop-portal-gnome
 		kde-plasma/xdg-desktop-portal-kde
 	)
 	cowork? (
 		amd64? (
 			app-emulation/qemu[qemu_softmmu_targets_x86_64]
-			|| ( sys-firmware/edk2-bin sys-firmware/edk2-ovmf-bin )
+			sys-firmware/edk2-bin
 		)
 		arm64? (
 			app-emulation/qemu[qemu_softmmu_targets_aarch64]
