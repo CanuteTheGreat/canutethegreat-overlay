@@ -47,3 +47,6 @@ github = "ProtonVPN/python-proton-vpn-api-core"
 
 ["app-misc/claude-desktop-bin"]
 none = "vendor binary; Anthropic publishes no machine-readable advisory feed for the desktop app (Chromium/Electron runtime is bumped in each release)"
+
+["net-misc/etphonehome-bin"]
+github = "CanuteTheGreat/etphonehome"

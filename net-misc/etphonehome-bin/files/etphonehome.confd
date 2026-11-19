@@ -1,0 +1,6 @@
+# ETPhoneHome router client: the client's own settings are in /etc/etph/etph.conf (or the file named here).
+#etph_conf="/etc/etph/etph.conf"
+# where the supervised client logs, and the pause before a crashed client is restarted
+#output_log="/var/log/etphonehome.log"
+#error_log="/var/log/etphonehome.log"
+#respawn_delay=5

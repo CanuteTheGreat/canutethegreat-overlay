@@ -1,0 +1,43 @@
+#!/bin/sh
+# ETPhoneHome router client: service body shared by the OpenRC script and the systemd unit.
+# Every value comes from /etc/etph/etph.conf (sourced; see the comments there); an unset key takes the default below.
+# A different file can be named with ETPH_CONF (the init script / unit set it from /etc/conf.d/etphonehome or the unit environment).
+ETPH_CONF=${ETPH_CONF:-/etc/etph/etph.conf}
+ETPH_BIN=/usr/sbin/etphonehome
+ETPH_TRANSPORT=usb; ETPH_HOST=; ETPH_PORT=; ETPH_TOKEN=; ETPH_INTERFACE=etph0
+ETPH_STATE_DIR=/etc/etph; ETPH_RUN_DIR=/run/etph; ETPH_STATUS_FILE=; ETPH_MAX_RETRIES=0
+ETPH_LOG_LEVEL=info; ETPH_ROUTES=yes; ETPH_TUN_ADDRESS=; ETPH_TUN_PEER=; ETPH_USB_LINK=auto
+ETPH_UP_SCRIPT=; ETPH_DOWN_SCRIPT=; ETPH_EXTRA=
+[ -f "$ETPH_CONF" ] && . "$ETPH_CONF"
+[ -n "$ETPH_STATUS_FILE" ] || ETPH_STATUS_FILE=$ETPH_RUN_DIR/status.json
+
+export HOME=$ETPH_STATE_DIR RUST_LOG=$ETPH_LOG_LEVEL ETPH_USB_LINK
+umask 077
+mkdir -p "$ETPH_STATE_DIR/.android" "$ETPH_RUN_DIR" || exit 1
+chmod 700 "$ETPH_STATE_DIR" "$ETPH_STATE_DIR/.android"
+# the TUN device must exist for the uplink; the module is loaded on demand when the kernel has it as a module
+[ -e /dev/net/tun ] || modprobe tun 2>/dev/null || true
+[ -e /dev/net/tun ] || { echo "etphonehome: /dev/net/tun is missing (kernel needs CONFIG_TUN)" >&2; exit 1; }
+
+# adb key: RSA generation can take a while on a small core, so it never blocks the client
+[ -s "$ETPH_STATE_DIR/.android/adbkey" ] || ( nice -n 10 "$ETPH_BIN" adb-keygen >"$ETPH_RUN_DIR/keygen.log" 2>&1 & )
+
+set -- "$ETPH_BIN" --router
+case "$ETPH_TRANSPORT" in
+  wifi) [ -n "$ETPH_HOST" ] || { echo "etphonehome: ETPH_TRANSPORT=wifi needs ETPH_HOST" >&2; exit 1; }
+        set -- "$@" wifi --host "$ETPH_HOST"; [ -n "$ETPH_PORT" ] && set -- "$@" --port "$ETPH_PORT"
+        [ -n "$ETPH_TOKEN" ] && export ETPH_TOKEN;;
+  auto) set -- "$@" auto
+        [ -n "$ETPH_HOST" ] && { set -- "$@" --host "$ETPH_HOST"; [ -n "$ETPH_TOKEN" ] && export ETPH_TOKEN; }
+        [ -n "$ETPH_PORT" ] && set -- "$@" --port "$ETPH_PORT";;
+  usb)  set -- "$@" usb --native; [ -n "$ETPH_PORT" ] && set -- "$@" --port "$ETPH_PORT";;
+  *)    echo "etphonehome: ETPH_TRANSPORT must be usb, auto or wifi (got '$ETPH_TRANSPORT')" >&2; exit 1;;
+esac
+set -- "$@" --interface "$ETPH_INTERFACE" --reconnect --max-retries "$ETPH_MAX_RETRIES" --status-file "$ETPH_STATUS_FILE"
+[ "$ETPH_ROUTES" = yes ] || set -- "$@" --no-routes
+[ -n "$ETPH_TUN_ADDRESS" ] && set -- "$@" --tun-address "$ETPH_TUN_ADDRESS"
+[ -n "$ETPH_TUN_PEER" ] && set -- "$@" --tun-peer "$ETPH_TUN_PEER"
+[ -n "$ETPH_UP_SCRIPT" ] && set -- "$@" --up-script "$ETPH_UP_SCRIPT"
+[ -n "$ETPH_DOWN_SCRIPT" ] && set -- "$@" --down-script "$ETPH_DOWN_SCRIPT"
+# ETPH_EXTRA is word-split on purpose (extra client options)
+exec "$@" $ETPH_EXTRA

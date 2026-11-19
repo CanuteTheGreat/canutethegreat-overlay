@@ -1,0 +1,20 @@
+#!/sbin/openrc-run
+# ETPhoneHome router client (a phone as the router's internet uplink over USB or Wi-Fi).
+description="ETPhoneHome router client"
+command=/usr/libexec/etphonehome/etphonehome-run
+supervisor=supervise-daemon
+respawn_delay=${respawn_delay:-5}
+respawn_max=0
+output_log="${output_log:-/var/log/etphonehome.log}"
+error_log="${error_log:-/var/log/etphonehome.log}"
+# optional: etph_conf in /etc/conf.d/etphonehome names another settings file (default /etc/etph/etph.conf)
+export ETPH_CONF="${etph_conf:-/etc/etph/etph.conf}"
+
+depend() {
+	use net
+	after localmount modules
+}
+
+start_pre() {
+	checkpath -d -m 0700 /etc/etph
+}

@@ -118,6 +118,13 @@ use_latest_release = true
 from_pattern = 'RELEASE\.(\d+)-(\d+)-(\d+)T.*'
 to_pattern = '\1.\2.\3'
 
+["net-misc/etphonehome-bin"]
+source = "gitea"
+host = "git.canutethegreat.com"
+gitea = "CanuteTheGreat/etphonehome"
+use_max_tag = true
+prefix = "v"
+
 ["net-misc/ntfy-bin"]
 source = "github"
 github = "binwiederhier/ntfy"

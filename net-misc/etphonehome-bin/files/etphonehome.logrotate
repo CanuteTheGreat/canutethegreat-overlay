@@ -1,0 +1,8 @@
+/var/log/etphonehome.log {
+	missingok
+	notifempty
+	weekly
+	rotate 4
+	compress
+	copytruncate
+}

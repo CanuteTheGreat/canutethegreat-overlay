@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>canutethegreat@gmail.com</email>
+		<name>CanuteTheGreat</name>
+	</maintainer>
+	<longdescription>
+		Router client of Errant Solutions ETPH: uses a phone running the ETPH app as this machine's
+		internet connection (WAN) over USB (built-in ADB host, no adb package) or Wi-Fi (TLS). Upstream's
+		static router build (no BlueZ), with an OpenRC script and a systemd unit; settings in /etc/etph/etph.conf.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">CanuteTheGreat/etphonehome</remote-id>
+	</upstream>
+</pkgmetadata>

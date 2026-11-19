@@ -1,0 +1,18 @@
+[Unit]
+Description=ETPhoneHome router client (phone as the router's internet uplink)
+Documentation=https://errant.solutions/etphonehome/
+After=network.target systemd-modules-load.service
+
+[Service]
+Type=simple
+# Settings: /etc/etph/etph.conf. A drop-in may set Environment=ETPH_CONF=/other/file
+ExecStart=/usr/libexec/etphonehome/etphonehome-run
+Restart=always
+RestartSec=5
+# the client opens a TUN device, runs `ip` and writes /etc/etph (adb key) and /run/etph (status)
+NoNewPrivileges=yes
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target
