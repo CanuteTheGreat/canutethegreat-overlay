@@ -9,11 +9,12 @@ HOMEPAGE="https://protonvpn.com/"
 LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="systemd"
 
 RDEPEND="
-	net-vpn/proton-vpn-gtk-app
-	net-vpn/proton-vpn-cli
-	net-vpn/proton-vpn-daemon
+	net-vpn/proton-vpn-gtk-app[systemd?]
+	net-vpn/proton-vpn-cli[systemd?]
+	systemd? ( net-vpn/proton-vpn-daemon )
 	dev-python/proton-keyring-linux
 	gnome-base/gnome-keyring
 "

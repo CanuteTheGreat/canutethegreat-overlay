@@ -1,0 +1,17 @@
+#!/sbin/openrc-run
+# Copyright 1999-2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+# OpenRC twin of proton-vpn-kill-switch-boot.service: not enabled by default ("permanent mode" = enabled in the default runlevel)
+
+description="Proton VPN permanent kill switch"
+
+depend() {
+	need localmount
+	before net
+}
+
+start() {
+	ebegin "Applying the Proton VPN kill switch boot rules"
+	/usr/libexec/proton-vpn-kill-switch-service --apply-boot-rules
+	eend $?
+}

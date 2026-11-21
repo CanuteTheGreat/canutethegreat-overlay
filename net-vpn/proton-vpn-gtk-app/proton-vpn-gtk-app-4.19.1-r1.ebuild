@@ -14,8 +14,10 @@ SRC_URI="https://github.com/ProtonVPN/proton-vpn-gtk-app/archive/refs/tags/v${PV
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="systemd"
 RESTRICT="test"
 
+# split tunneling: the daemon is a systemd service (python-systemd, sd units); OpenRC systems run without it
 RDEPEND="
 	gui-libs/gtk:4[introspection]
 	gnome-base/librsvg
@@ -30,7 +32,7 @@ RDEPEND="
 	dev-python/pycairo[${PYTHON_USEDEP}]
 	dev-python/pygobject[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
-	net-vpn/proton-vpn-daemon[${PYTHON_USEDEP}]
+	systemd? ( net-vpn/proton-vpn-daemon[${PYTHON_USEDEP}] )
 "
 BDEPEND="sys-devel/gettext"
 

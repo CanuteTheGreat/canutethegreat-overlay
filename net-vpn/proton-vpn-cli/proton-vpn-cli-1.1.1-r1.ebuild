@@ -14,8 +14,10 @@ SRC_URI="https://github.com/ProtonVPN/proton-vpn-cli/archive/refs/tags/v${PV}.ta
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="systemd"
 RESTRICT="test"
 
+# split tunneling: the daemon is a systemd service (python-systemd, sd units); OpenRC systems run without it
 RDEPEND="
 	dev-python/click[${PYTHON_USEDEP}]
 	dev-python/dbus-fast[${PYTHON_USEDEP}]
@@ -24,5 +26,5 @@ RDEPEND="
 	dev-python/proton-keyring-linux[${PYTHON_USEDEP}]
 	dev-python/proton-vpn-api-core-bin[${PYTHON_USEDEP}]
 	dev-python/tabulate[${PYTHON_USEDEP}]
-	net-vpn/proton-vpn-daemon[${PYTHON_USEDEP}]
+	systemd? ( net-vpn/proton-vpn-daemon[${PYTHON_USEDEP}] )
 "

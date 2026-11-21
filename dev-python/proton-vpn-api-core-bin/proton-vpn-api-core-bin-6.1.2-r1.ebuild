@@ -22,13 +22,13 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RESTRICT="mirror strip"
 QA_PREBUILT="usr/libexec/* usr/lib*/python3*/site-packages/proton/vpn/platform.abi3.so"
 
+# no libsystemd linkage (readelf: libc, libgcc_s, libm, libmnl, libnftnl only): works on OpenRC and systemd
 RDEPEND="
 	${PYTHON_DEPS}
 	net-libs/libnftnl
 	net-libs/libmnl
 	net-misc/networkmanager[introspection]
 	net-vpn/networkmanager-openvpn
-	sys-apps/systemd
 	sys-auth/polkit
 	sys-apps/dbus
 	dev-python/cryptography[${PYTHON_USEDEP}]
@@ -75,4 +75,5 @@ src_install() {
 	insinto /usr/share/polkit-1/actions
 	doins usr/share/polkit-1/actions/*.policy
 	systemd_dounit lib/systemd/system/proton-vpn-kill-switch-boot.service
+	newinitd "${FILESDIR}"/proton-vpn-kill-switch-boot.initd proton-vpn-kill-switch-boot
 }
