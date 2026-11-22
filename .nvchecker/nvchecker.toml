@@ -42,9 +42,10 @@ use_latest_release = true
 prefix = "v"
 
 ["net-misc/freedownloadmanager"]
-# the unversioned 'latest' .deb is the only download; read its control file
+# the unversioned 'latest' .deb is the only download; read its control file from the first 128 KiB
+# (a full 40 MB download from this CDN timed out in CI -> no-result)
 source = "cmd"
-cmd = "d=$(mktemp -d) && curl -fsSL -o $d/fdm.deb https://files2.freedownloadmanager.org/6/latest/freedownloadmanager.deb && ar p $d/fdm.deb control.tar.xz | tar xJO ./control | sed -n 's/^Version: //p'; rm -rf $d"
+cmd = "d=$(mktemp -d) && curl -fsSL -m 90 -r 0-131071 -o $d/fdm.deb https://files2.freedownloadmanager.org/6/latest/freedownloadmanager.deb && ar p $d/fdm.deb control.tar.xz | tar xJO ./control | sed -n 's/^Version: //p'; rm -rf $d"
 
 # Proton apps: official Linux builds, version read from proton.me/download metadata (.ci/proton-latest.py)
 ["app-admin/proton-pass-bin"]
