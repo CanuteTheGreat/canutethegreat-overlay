@@ -5,7 +5,7 @@ EAPI=8
 
 inherit unpacker
 
-# PV 6.5.12_p20261123055747 = omnibus package 6.5.12~20261123055747~1rapid7-1
+# PV 6.5.13_p20261124055653 = omnibus package 6.5.13~20261124055653~1rapid7-1
 MY_PV="${PV%%_p*}"
 MY_BUILD="${PV##*_p}"
 MY_DEB="metasploit-framework_${MY_PV}~${MY_BUILD}~1rapid7-1_amd64.deb"
