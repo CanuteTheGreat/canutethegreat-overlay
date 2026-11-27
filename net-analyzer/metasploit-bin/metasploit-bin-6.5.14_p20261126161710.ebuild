@@ -5,10 +5,12 @@ EAPI=8
 
 inherit unpacker
 
-# PV 6.5.13_p20261124055653 = omnibus package 6.5.13~20261124055653~1rapid7-1
+# PV 6.5.14_p20261126161710 = omnibus package 6.5.14~20261126161710.git.5.d79fc64~1rapid7-1
+# (MY_GIT = the git suffix of the vendor version; update it with each bump)
+MY_GIT=".git.5.d79fc64"
 MY_PV="${PV%%_p*}"
 MY_BUILD="${PV##*_p}"
-MY_DEB="metasploit-framework_${MY_PV}~${MY_BUILD}~1rapid7-1_amd64.deb"
+MY_DEB="metasploit-framework_${MY_PV}~${MY_BUILD}${MY_GIT}~1rapid7-1_amd64.deb"
 
 DESCRIPTION="Metasploit Framework penetration testing platform (Rapid7 omnibus binary build)"
 HOMEPAGE="https://www.metasploit.com/ https://github.com/rapid7/metasploit-framework"
